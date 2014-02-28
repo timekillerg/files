@@ -29,7 +29,13 @@ public class Done_PlayerController : MonoBehaviour
 		}
 	}
 
-	void FixedUpdate ()
+	void FixedUpdate()
+	{
+		LoadTouchEvents ();
+		LoadMouseEvents ();
+	}
+
+	void LoadTouchEvents ()
 	{
 		if (Input.touchCount > 0) {
 			Ray ray = Camera.main.ScreenPointToRay (Input.GetTouch(0).position);
@@ -57,9 +63,7 @@ public class Done_PlayerController : MonoBehaviour
 
 	}
 
-/*
-
-	void FixedUpdate ()
+	void LoadMouseEvents ()
 	{
 		if (Input.GetMouseButtonDown (0)) {
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -84,6 +88,6 @@ public class Done_PlayerController : MonoBehaviour
 			rigidbody.velocity = Vector3.zero;
 		}
 		rigidbody.rotation = Quaternion.Euler (0.0f, 0.0f, rigidbody.velocity.x * -tilt);
-	}*/
+	}
 
 }

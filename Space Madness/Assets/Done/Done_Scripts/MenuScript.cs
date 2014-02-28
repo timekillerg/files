@@ -6,7 +6,7 @@ public class MenuScript : MonoBehaviour {
 	public GameObject mainMenuObject;
 	private enum Status {LOADING, MENU, FAST_GAME, EXIT};
 	private Status currentStatus;
-	private bool isBack;
+	private static bool isStart = true;
 
 	void UnlockGame()		
 	{
@@ -17,15 +17,15 @@ public class MenuScript : MonoBehaviour {
 	}
 
 	void Start () {
-		if((isBack!=null)&&(isBack))
+		if (isStart) 
+		{
+			currentStatus = Status.LOADING;
+		}
+		else 
 		{
 			currentStatus = Status.MENU;
 			Load();
-			isBack = false;
-		}			
-		else
-			currentStatus = Status.LOADING;
-
+		}
 	}
 	
 	//а эта функция вызывается еще раньше чем Start (),	
@@ -77,14 +77,16 @@ public class MenuScript : MonoBehaviour {
 
 	}
 
-	void FixedUpdate()
+	void Update()
 	{
 		LoadTouchEvents ();
 		LoadBackButtonEvents ();
+		LoadMouseEvents ();
 	}
 
 	void BackToMenu()
 	{
+		isStart = false;
 		Application.LoadLevel(0);
 	}
 
@@ -111,6 +113,30 @@ public class MenuScript : MonoBehaviour {
 		}
 	}
 
+	private void LoadMouseEvents()
+	{
+		if (Input.GetMouseButton(0)) {
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			RaycastHit hit;				
+			if (Physics.Raycast (ray, out hit, 100)) {					
+				if (hit.collider.tag == "FastGameStartButton") {
+					currentStatus = Status.FAST_GAME;
+					Load();
+				}					
+				if (hit.collider.tag == "ExitGameButton") {
+					currentStatus = Status.EXIT;
+					Load();
+				}
+				if(currentStatus == Status.LOADING)
+				{
+					currentStatus = Status.MENU;
+					Load();
+				}
+			}
+		}
+	}
+
+
 	private void LoadBackButtonEvents()
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))			
@@ -127,7 +153,6 @@ public class MenuScript : MonoBehaviour {
 				break;
 			case Status.FAST_GAME:
 				currentStatus = Status.MENU;
-				isBack = true;
 				BackToMenu();
 				break;
 			}
