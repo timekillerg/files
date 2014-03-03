@@ -2,9 +2,13 @@
 using System.Collections;
 
 public class MenuScript : MonoBehaviour {	
-	public GameObject mainLoadObject;
-	public GameObject mainMenuObject;
-	private enum Status {LOADING, MENU, FAST_GAME, EXIT};
+	public GameObject screenLoadingGameObject;
+	public GameObject screenMainMenuGameObject;
+	public GameObject screenScoresGameObject;
+	public GameObject screenMapsGameObject;
+	public GameObject screenLevelsGameObject;
+
+	private enum Status {LOADING, MENU, FAST_GAME, MAPS, LEVELS, SCORES, EXIT};
 	private Status currentStatus;
 	private static bool isStart = true;
 
@@ -50,6 +54,12 @@ public class MenuScript : MonoBehaviour {
 		case Status.EXIT:
 			ExitGame();
 			break;
+		case Status.MAPS:
+			ShowMaps();
+			break;
+		case Status.SCORES:
+			ShowScores();
+			break;
 		case Status.LOADING:
 			ShowLoadingScreen();
 			break;
@@ -63,8 +73,28 @@ public class MenuScript : MonoBehaviour {
 
 	void ShowMainMenu()
 	{
-		Destroy(mainLoadObject);		
-		mainMenuObject.transform.position = new Vector3 (0.0f,0.0f,0.0f);
+		if (screenLoadingGameObject)
+			Destroy (screenLoadingGameObject);
+		screenMainMenuGameObject.transform.position = new Vector3 (0.0f,0.0f,0.0f);
+		screenLevelsGameObject.transform.position = new Vector3 (-50f,0.0f,0.0f);
+		screenMapsGameObject.transform.position = new Vector3 (-50.0f,0.0f,0.0f);
+		screenScoresGameObject.transform.position = new Vector3 (-50.0f,0.0f,0.0f);
+	}
+
+	void ShowMaps()
+	{
+		screenMainMenuGameObject.transform.position = new Vector3 (-50.0f,0.0f,0.0f);
+		screenLevelsGameObject.transform.position = new Vector3 (-50f,0.0f,0.0f);
+		screenMapsGameObject.transform.position = new Vector3 (0.0f,0.0f,0.0f);
+		screenScoresGameObject.transform.position = new Vector3 (-50.0f,0.0f,0.0f);
+	}
+
+	void ShowScores()
+	{
+		screenMainMenuGameObject.transform.position = new Vector3 (-50.0f,0.0f,0.0f);
+		screenLevelsGameObject.transform.position = new Vector3 (-50f,0.0f,0.0f);
+		screenMapsGameObject.transform.position = new Vector3 (-50.0f,0.0f,0.0f);
+		screenScoresGameObject.transform.position = new Vector3 (0.0f,0.0f,0.0f);
 	}
 
 	void ExitGame()
@@ -104,6 +134,14 @@ public class MenuScript : MonoBehaviour {
 					currentStatus = Status.EXIT;
 					Load();
 				}
+				if (hit.collider.tag == "HistoryButton") {
+					currentStatus = Status.MAPS;
+					Load();
+				}				
+				if (hit.collider.tag == "ScoresButton") {
+					currentStatus = Status.SCORES;
+					Load();
+				}
 				if(currentStatus == Status.LOADING)
 				{
 					currentStatus = Status.MENU;
@@ -127,6 +165,14 @@ public class MenuScript : MonoBehaviour {
 					currentStatus = Status.EXIT;
 					Load();
 				}
+				if (hit.collider.tag == "HistoryButton") {
+					currentStatus = Status.MAPS;
+					Load();
+				}				
+				if (hit.collider.tag == "ScoresButton") {
+					currentStatus = Status.SCORES;
+					Load();
+				}
 				if(currentStatus == Status.LOADING)
 				{
 					currentStatus = Status.MENU;
@@ -143,6 +189,8 @@ public class MenuScript : MonoBehaviour {
 		{
 			switch (currentStatus)
 			{
+			case Status.MAPS:
+			case Status.SCORES:
 			case Status.LOADING:
 				currentStatus = Status.MENU;
 				Load();
