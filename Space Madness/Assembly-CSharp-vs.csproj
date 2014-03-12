@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Done\Done_Scripts\AppearMenuButtons.cs" />
+     <Compile Include="Assets\Done\Done_Scripts\Core\AppCore.cs" />
      <Compile Include="Assets\Done\Done_Scripts\Done_BGScroller.cs" />
      <Compile Include="Assets\Done\Done_Scripts\Done_DestroyByBoundary.cs" />
      <Compile Include="Assets\Done\Done_Scripts\Done_DestroyByContact.cs" />
@@ -57,6 +58,8 @@
      <Compile Include="Assets\Done\Done_Scripts\Done_PlayerController.cs" />
      <Compile Include="Assets\Done\Done_Scripts\Done_RandomRotator.cs" />
      <Compile Include="Assets\Done\Done_Scripts\Done_WeaponController.cs" />
+     <Compile Include="Assets\Done\Done_Scripts\MenuButtonAnimation.cs" />
+     <Compile Include="Assets\Done\Done_Scripts\MenuButtonClickListener.cs" />
      <Compile Include="Assets\Done\Done_Scripts\MenuScript.cs" />
      <Compile Include="Assets\Done\Done_Scripts\TouchMoveButtons.cs" />
      <Compile Include="Assets\Scripts\DestroyByBoundary.cs" />
