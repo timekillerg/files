@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using AssemblyCSharp;
 
 public class Done_GameController : MonoBehaviour
 {
@@ -37,6 +38,10 @@ public class Done_GameController : MonoBehaviour
 			{
 				Application.LoadLevel (Application.loadedLevel);
 			}
+		}
+		if (Input.GetKeyDown(KeyCode.Escape))			
+		{
+			AppCore.BackToMenu();
 		}
 	}
 	
