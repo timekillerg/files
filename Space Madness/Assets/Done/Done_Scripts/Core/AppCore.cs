@@ -77,18 +77,10 @@ namespace AssemblyCSharp
 			goMaps.rigidbody.velocity = Vector3.zero;
 			goScores.rigidbody.velocity = Vector3.zero;
 			goMain.rigidbody.velocity = Vector3.zero;
-			goMaps.rigidbody.angularVelocity  = Vector3.zero;
-			goScores.rigidbody.angularVelocity  = Vector3.zero;
-			goMain.rigidbody.angularVelocity  = Vector3.zero;
-
 			goMeteorLevel.rigidbody.velocity = Vector3.zero;
-			goMeteorLevel.rigidbody.angularVelocity  = Vector3.zero;
 			goIceLevel.rigidbody.velocity = Vector3.zero;
-			goIceLevel.rigidbody.angularVelocity  = Vector3.zero;
 			goSunLevel.rigidbody.velocity = Vector3.zero;
-			goSunLevel.rigidbody.angularVelocity  = Vector3.zero;
 			goDownLevel.rigidbody.velocity = Vector3.zero;
-			goDownLevel.rigidbody.angularVelocity  = Vector3.zero;
 
 			switch (currentStatus) 
 			{
@@ -152,40 +144,79 @@ namespace AssemblyCSharp
 		{
 			if(GameObject.Find ("Screen First Loading"))
 				MonoBehaviour.Destroy (GameObject.Find ("Screen First Loading"));
-
+			goMeteorLevel.transform.position = new Vector3 (14f,0.0f,0.0f);
+			goIceLevel.transform.position = new Vector3 (14f,0.0f,0.0f);
+			goDownLevel.transform.position = new Vector3 (14f,0.0f,0.0f);
+			goSunLevel.transform.position = new Vector3 (14f,0.0f,0.0f);
 			goMain.transform.position = new Vector3 (-14f,0.0f,0.0f);
 			goMain.rigidbody.AddForce (Vector3.right * 80000 * Time.deltaTime);
 
-			if(goMaps.transform.position.x > -2 && goMaps.transform.position.x <2)
+			if(previousStatus == Status.MAPS)
+			{
+				goMaps.transform.position = Vector3.zero;
 				goMaps.rigidbody.AddForce (Vector3.right * 80000 * Time.deltaTime);
+			}
+			else			
+				goMaps.transform.position = new Vector3 (14f,0.0f,0.0f);
 
-			if(goScores.transform.position.x > -2 && goScores.transform.position.x <2)
+			if(previousStatus == Status.SCORES)	
+			{
+				goScores.transform.position = Vector3.zero;
 				goScores.rigidbody.AddForce (Vector3.right * 80000 * Time.deltaTime);
-
+			}
+			else
+				goScores.transform.position = new Vector3 (14f,0.0f,0.0f);
 		}
 		
 		static void ShowMaps()
 		{
-			if(goIceLevel.transform.position.x > -1 && goIceLevel.transform.position.x <1)
-				goIceLevel.rigidbody.AddForce (Vector3.right * 80000 * Time.deltaTime);
-			if(goDownLevel.transform.position.x > -1 && goDownLevel.transform.position.x <1)
-				goDownLevel.rigidbody.AddForce (Vector3.right * 80000 * Time.deltaTime);
-			if(goSunLevel.transform.position.x > -1 && goSunLevel.transform.position.x <1)
-				goSunLevel.rigidbody.AddForce (Vector3.right * 80000 * Time.deltaTime);
-			if(goMeteorLevel.transform.position.x > -1 && goMeteorLevel.transform.position.x <1)
-				goMeteorLevel.rigidbody.AddForce (Vector3.right * 80000 * Time.deltaTime);
-			if(goMain.transform.position.x > -1 && goMain.transform.position.x <1)
-				goMain.rigidbody.AddForce (Vector3.left * 80000 * Time.deltaTime);
-
-			if(AppCore.GetPresiousStatus() == AppCore.Status.MENU)
+			switch(previousStatus)
 			{
+			case Status.MENU:
+				if(goMain.transform.position.x >= -0.2 && goMain.transform.position.x <= 0.2)
+				{
+					goMain.transform.position = Vector3.zero;
+					goMain.rigidbody.AddForce (Vector3.left * 80000 * Time.deltaTime);
+				}
 				goMaps.transform.position = new Vector3 (14f,0.0f,0.0f);
 				goMaps.rigidbody.AddForce (Vector3.left * 80000 * Time.deltaTime);
-			}
-			else
-			{
+				break;
+			case Status.LEVELS_ICE:
+				if(goIceLevel.transform.position.x >= -0.2 && goIceLevel.transform.position.x <= 0.2)
+				{
+					goIceLevel.transform.position = Vector3.zero;
+					goIceLevel.rigidbody.AddForce (Vector3.right * 80000 * Time.deltaTime);
+				}
 				goMaps.transform.position = new Vector3 (-14f,0.0f,0.0f);
 				goMaps.rigidbody.AddForce (Vector3.right * 80000 * Time.deltaTime);
+				break;
+			case Status.LEVELS_SUN:
+				if(goSunLevel.transform.position.x >= -0.2 && goSunLevel.transform.position.x <= 0.2)
+				{
+					goSunLevel.transform.position = Vector3.zero;
+					goSunLevel.rigidbody.AddForce (Vector3.right * 80000 * Time.deltaTime);
+				}
+				goMaps.transform.position = new Vector3 (-14f,0.0f,0.0f);
+				goMaps.rigidbody.AddForce (Vector3.right * 80000 * Time.deltaTime);
+				break;
+			case Status.LEVELS_DOWN:
+				if(goDownLevel.transform.position.x >= -0.2 && goDownLevel.transform.position.x <= 0.2)
+				{
+					goDownLevel.transform.position = Vector3.zero;
+					goDownLevel.rigidbody.AddForce (Vector3.right * 80000 * Time.deltaTime);
+				}
+				goMaps.transform.position = new Vector3 (-14f,0.0f,0.0f);
+				goMaps.rigidbody.AddForce (Vector3.right * 80000 * Time.deltaTime);
+				break;
+			case Status.LEVELS_METEOR:
+				if(goMeteorLevel.transform.position.x >= -0.2 && goMeteorLevel.transform.position.x <= 0.2)
+				{
+					goMeteorLevel.transform.position = Vector3.zero;
+					goMeteorLevel.rigidbody.AddForce (Vector3.right * 80000 * Time.deltaTime);
+				}
+				goMaps.transform.position = new Vector3 (-14f,0.0f,0.0f);
+				goMaps.rigidbody.AddForce (Vector3.right * 80000 * Time.deltaTime);
+				break;
 			}
 		}
 		
@@ -208,7 +239,6 @@ namespace AssemblyCSharp
 		{
 			
 		}
-
 		
 		public static void BackToMenu()
 		{
@@ -219,34 +249,43 @@ namespace AssemblyCSharp
 		}
 
 		public static void BackButtonPress()
-		{			
-			if((goMain.rigidbody.position.x < 1 && goMain.rigidbody.position.x > -1)
-			   || (goMaps.rigidbody.position.x < 1 && goMaps.rigidbody.position.x > -1)
-			   || (goScores.rigidbody.position.x < 1 && goScores.rigidbody.position.x > -1)
-			   || (goIceLevel.rigidbody.position.x < 1 && goIceLevel.rigidbody.position.x > -1)			   
-			   || (goDownLevel.rigidbody.position.x < 1 && goDownLevel.rigidbody.position.x > -1)			   
-			   || (goMeteorLevel.rigidbody.position.x < 1 && goMeteorLevel.rigidbody.position.x > -1)
-			   || (goSunLevel.rigidbody.position.x < 1 && goSunLevel.rigidbody.position.x > -1))			
-					SetPreviousStatus(currentStatus);
-			switch (currentStatus)
+		{
+			if((goMain.rigidbody.position.x <= 0.2 && goMain.rigidbody.position.x >= -0.2)
+			   || (goMaps.rigidbody.position.x <= 0.2 && goMaps.rigidbody.position.x >= -0.2)
+			   || (goScores.rigidbody.position.x <= 0.2 && goScores.rigidbody.position.x >= -0.2)
+			   || (goIceLevel.rigidbody.position.x <= 0.2 && goIceLevel.rigidbody.position.x >= -0.2)			   
+			   || (goDownLevel.rigidbody.position.x <= 0.2 && goDownLevel.rigidbody.position.x >= -0.2)			   
+			   || (goMeteorLevel.rigidbody.position.x <= 0.2 && goMeteorLevel.rigidbody.position.x >= -0.2)
+			   || (goSunLevel.rigidbody.position.x <= 0.2 && goSunLevel.rigidbody.position.x >= -0.2))
 			{
-			case Status.MAPS:				
-			case Status.SCORES:
-			case Status.LOADING:				
-				SetStatus(AppCore.Status.MENU);
-				Load();
-				break;
-			case Status.MENU:
-				SetStatus(AppCore.Status.EXIT);
-				Load();
-				break;
-			case Status.LEVELS_METEOR:
-			case Status.LEVELS_ICE:
-			case Status.LEVELS_SUN:
-			case Status.LEVELS_DOWN:
-				SetStatus(AppCore.Status.MAPS);
-				Load();
-				break;
+				goMaps.rigidbody.velocity = Vector3.zero;
+				goScores.rigidbody.velocity = Vector3.zero;
+				goMain.rigidbody.velocity = Vector3.zero;
+				goMeteorLevel.rigidbody.velocity = Vector3.zero;
+				goIceLevel.rigidbody.velocity = Vector3.zero;
+				goSunLevel.rigidbody.velocity = Vector3.zero;
+				goDownLevel.rigidbody.velocity = Vector3.zero;
+					SetPreviousStatus(currentStatus);
+					switch (currentStatus)
+					{
+					case Status.MAPS:				
+					case Status.SCORES:
+					case Status.LOADING:				
+						SetStatus(AppCore.Status.MENU);
+						Load();
+						break;
+					case Status.MENU:
+						SetStatus(AppCore.Status.EXIT);
+						Load();
+						break;
+					case Status.LEVELS_METEOR:
+					case Status.LEVELS_ICE:
+					case Status.LEVELS_SUN:
+					case Status.LEVELS_DOWN:
+						SetStatus(AppCore.Status.MAPS);
+						Load();
+						break;
+			}
 			}
 		}
 	}

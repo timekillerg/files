@@ -12,7 +12,7 @@ public class ScreenMoveRightListener : MonoBehaviour {
 	void Update () {
 		rigidbody.position = new Vector3 
 			(
-				Mathf.Clamp (rigidbody.position.x, -15, 0), 
+				Mathf.Clamp (rigidbody.position.x, -15, 0.2f), 
 				0.0f, 
 				0.0f
 				);

@@ -14,49 +14,40 @@ public class MenuButtonPressListener : MonoBehaviour {
 	}
 	
 	void Update () {
-		if ((GameObject.Find ("Screen Main Menu").transform.position.x>-1 && GameObject.Find ("Screen Main Menu").transform.position.x< 1)
-			 || (GameObject.Find ("Screen Maps").transform.position.x>-1 && GameObject.Find ("Screen Maps").transform.position.x< 1))
-		{
-			if (Input.touchCount > 0) {
-			Ray ray = Camera.main.ScreenPointToRay (Input.GetTouch(0).position);
-			RaycastHit hit;				
-			if (Physics.Raycast (ray, out hit, 100)) {
-				if(hit.collider.gameObject == gameObject)
-				{
-					((SpriteRenderer)renderer).sprite = pressedSprite;
-					MenuItemClicked();
-					pressedTime = Time.time;
-
-				}
-			}
-		}
-		}
-		if (Time.time > pressedTime + 0.5f) {
-			if(((SpriteRenderer)renderer).sprite!=notPressedSprite)
-			{
-				((SpriteRenderer)renderer).sprite = notPressedSprite;
-				pressedTime = 0;
-			}
-		}
 	}
 	
 	void OnMouseDown()
 	{
-		pressedTime = Time.time;
-		if ((GameObject.Find ("Screen Main Menu").transform.position.x>-1 && GameObject.Find ("Screen Main Menu").transform.position.x< 1)
-		 || (GameObject.Find ("Screen Maps").transform.position.x>-1 && GameObject.Find ("Screen Maps").transform.position.x< 1))
-		{
-			((SpriteRenderer)renderer).sprite = pressedSprite;
+		if ((GameObject.Find ("Screen Main Menu").transform.position.x>=-0.2 && GameObject.Find ("Screen Main Menu").transform.position.x <= 0.2)
+		    || (GameObject.Find ("Screen Maps").transform.position.x>=-0.2 && GameObject.Find ("Screen Maps").transform.position.x <= 0.2))
+		if (Input.GetMouseButtonDown(0)) {
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			RaycastHit hit;				
+			if (Physics.Raycast (ray, out hit, 100)) {
+				if(hit.collider.gameObject == gameObject)
+				{
+					((SpriteRenderer)renderer).sprite = pressedSprite;					
+					pressedTime = Time.time;
+				}
+			}
 		}
 	}
-	
+
 	void OnMouseUp ()
 	{
-		if ((GameObject.Find ("Screen Main Menu").transform.position.x>-1 && GameObject.Find ("Screen Main Menu").transform.position.x< 1)
-		 || (GameObject.Find ("Screen Maps").transform.position.x>-1 && GameObject.Find ("Screen Maps").transform.position.x< 1))
-		{
-			((SpriteRenderer)renderer).sprite = notPressedSprite;
-			MenuItemClicked();
+		((SpriteRenderer)renderer).sprite = notPressedSprite;
+		if ((GameObject.Find ("Screen Main Menu").transform.position.x>=-0.2 && GameObject.Find ("Screen Main Menu").transform.position.x <= 0.2)
+		    || (GameObject.Find ("Screen Maps").transform.position.x>=-0.2 && GameObject.Find ("Screen Maps").transform.position.x <= 0.2))
+		if (Input.GetMouseButtonUp(0)) {
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			RaycastHit hit;				
+			if (Physics.Raycast (ray, out hit, 100)) {
+				if(hit.collider.gameObject == gameObject)
+				{										
+					pressedTime = 0;
+					MenuItemClicked();
+				}
+			}
 		}
 	}
 

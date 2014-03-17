@@ -34,6 +34,36 @@ public class MenuScript : MonoBehaviour {
 			AppCore.SetStatus(AppCore.Status.MENU);
 			AppCore.Load();
 		}
+		switch(AppCore.GetCurrentStatus())
+		{
+			case AppCore.Status.MENU:
+			stopIfStopPosition(GameObject.Find("Screen Main Menu"));
+			break;
+			case AppCore.Status.MAPS:
+			stopIfStopPosition(GameObject.Find("Screen Maps"));
+			break;
+			case AppCore.Status.SCORES:
+			stopIfStopPosition(GameObject.Find("Screen Scores"));
+			break;
+			case AppCore.Status.LEVELS_ICE:
+			stopIfStopPosition(GameObject.Find ("Screen Levels Ice"));
+			break;
+			case AppCore.Status.LEVELS_METEOR:
+			stopIfStopPosition(GameObject.Find ("Screen Levels Meteor"));
+			break;
+			case AppCore.Status.LEVELS_SUN:
+			stopIfStopPosition(GameObject.Find ("Screen Levels Sun"));
+			break;
+			case AppCore.Status.LEVELS_DOWN:
+			stopIfStopPosition(GameObject.Find ("Screen Levels Down"));
+			break;
+		}
+	}
+
+	private void stopIfStopPosition(GameObject go)
+	{
+		if(go.rigidbody.position.x >=-0.2f && go.rigidbody.position.x <=0.2f)
+			go.rigidbody.velocity = Vector3.zero;
 	}
 
 	private void LoadMouseEvents()
@@ -50,7 +80,7 @@ public class MenuScript : MonoBehaviour {
 				}
 			}
 		}
-	}	
+	}
 
 
 	private void LoadBackButtonEvents()
