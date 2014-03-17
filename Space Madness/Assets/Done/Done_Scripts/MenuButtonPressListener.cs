@@ -18,8 +18,8 @@ public class MenuButtonPressListener : MonoBehaviour {
 	
 	void OnMouseDown()
 	{
-		if ((GameObject.Find ("Screen Main Menu").transform.position.x>=-0.2 && GameObject.Find ("Screen Main Menu").transform.position.x <= 0.2)
-		    || (GameObject.Find ("Screen Maps").transform.position.x>=-0.2 && GameObject.Find ("Screen Maps").transform.position.x <= 0.2))
+		if ((GameObject.Find ("Screen Main Menu").transform.position.x>=-3 && GameObject.Find ("Screen Main Menu").transform.position.x <= 3)
+		    || (GameObject.Find ("Screen Maps").transform.position.x>=-3 && GameObject.Find ("Screen Maps").transform.position.x <= 3))
 		if (Input.GetMouseButtonDown(0)) {
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			RaycastHit hit;				
@@ -35,9 +35,18 @@ public class MenuButtonPressListener : MonoBehaviour {
 
 	void OnMouseUp ()
 	{
+		switch(AppCore.GetCurrentStatus())
+		{
+		case AppCore.Status.LOADING:
+			if(GameObject.Find ("Screen First Loading"))
+				MonoBehaviour.Destroy (GameObject.Find ("Screen First Loading"));
+			AppCore.SetStatus(AppCore.Status.MENU);
+			break;
+		}
+
 		((SpriteRenderer)renderer).sprite = notPressedSprite;
-		if ((GameObject.Find ("Screen Main Menu").transform.position.x>=-0.2 && GameObject.Find ("Screen Main Menu").transform.position.x <= 0.2)
-		    || (GameObject.Find ("Screen Maps").transform.position.x>=-0.2 && GameObject.Find ("Screen Maps").transform.position.x <= 0.2))
+		if ((GameObject.Find ("Screen Main Menu").transform.position.x>=-3 && GameObject.Find ("Screen Main Menu").transform.position.x <= 3)
+		    || (GameObject.Find ("Screen Maps").transform.position.x>=-3 && GameObject.Find ("Screen Maps").transform.position.x <= 3))
 		if (Input.GetMouseButtonUp(0)) {
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			RaycastHit hit;				
@@ -52,7 +61,6 @@ public class MenuButtonPressListener : MonoBehaviour {
 	}
 
 	void MenuItemClicked() {
-		AppCore.SetPreviousStatus(AppCore.GetCurrentStatus());
 		switch(tag) {
 		case "FastGameStartButton":
 			AppCore.SetStatus(AppCore.Status.FAST_GAME);	
@@ -64,27 +72,21 @@ public class MenuButtonPressListener : MonoBehaviour {
 			break;
 		case "HistoryButton":
 			AppCore.SetStatus(AppCore.Status.MAPS);	
-			AppCore.Load();
 			break;
 		case "ScoresButton":
-			AppCore.SetStatus(AppCore.Status.SCORES);	
-			AppCore.Load();
+			AppCore.SetStatus(AppCore.Status.SCORES);
 			break;
 		case "DownMapButton":
-			AppCore.SetStatus(AppCore.Status.LEVELS_DOWN);	
-			AppCore.Load();
+			AppCore.SetStatus(AppCore.Status.LEVELS_DOWN);
 			break;
 		case "SunMapButton":
-			AppCore.SetStatus(AppCore.Status.LEVELS_SUN);	
-			AppCore.Load();
+			AppCore.SetStatus(AppCore.Status.LEVELS_SUN);
 			break;
 		case "IceMapButton":
-			AppCore.SetStatus(AppCore.Status.LEVELS_ICE);	
-			AppCore.Load();
+			AppCore.SetStatus(AppCore.Status.LEVELS_ICE);
 			break;
 		case "MeteorMapButton":
-			AppCore.SetStatus(AppCore.Status.LEVELS_METEOR);	
-			AppCore.Load();
+			AppCore.SetStatus(AppCore.Status.LEVELS_METEOR);
 			break;
 		}
 	}
