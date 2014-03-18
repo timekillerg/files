@@ -33,7 +33,8 @@ public class MenuScript : MonoBehaviour {
 
 	private void moveAndStopStopAtPosition(GameObject go, Vector3 expectedPosition)
 	{
-		go.rigidbody.transform.position = Vector3.Lerp(go.transform.position,expectedPosition, Time.deltaTime * speed);
+		go.rigidbody.velocity = Vector3.zero;
+		go.rigidbody.transform.position = Vector3.Lerp(go.transform.position,expectedPosition, Time.fixedDeltaTime * speed);
 		if(go.rigidbody.position.x >=(expectedPosition.x-V3_DELTA.x) && go.rigidbody.position.x <=(expectedPosition.x+V3_DELTA.x))
 			go.rigidbody.velocity = Vector3.zero;
 	}
@@ -81,7 +82,7 @@ public class MenuScript : MonoBehaviour {
 				moveAndStopStopAtPosition(scMapsGO,V3_LEFT);
 				break;
 			case AppCore.Status.LOADING:
-				if(Time.time > (startTime + 5))
+				if(Time.time > (startTime + 5) || Input.GetMouseButtonUp(0))
 				{
 					if(GameObject.Find ("Screen First Loading"))
 						MonoBehaviour.Destroy (GameObject.Find ("Screen First Loading"));

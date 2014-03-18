@@ -38,9 +38,9 @@ namespace AssemblyCSharp
 			}
 			else 
 			{
-				currentStatus = Status.MENU;
 				if(GameObject.Find ("Screen First Loading"))
 					MonoBehaviour.Destroy (GameObject.Find ("Screen First Loading"));
+				currentStatus = Status.MENU;
 			}
 		}
 		

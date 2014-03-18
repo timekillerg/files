@@ -23,7 +23,7 @@ public class LightAnimation : MonoBehaviour {
 	{
 		if(AppCore.GetCurrentStatus() == AppCore.Status.LOADING)
 		{
-			if(Time.time > (startTime+0.5))
+			if(Time.time > (startTime+0.75))
 				light.intensity = Mathf.Lerp(light.intensity, 0.5f, smooth * Time.deltaTime);
 		}
 		else

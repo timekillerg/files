@@ -33,15 +33,6 @@ public class MenuButtonPressListener : MonoBehaviour {
 
 	void OnMouseUp ()
 	{
-		switch(AppCore.GetCurrentStatus())
-		{
-		case AppCore.Status.LOADING:
-			if(GameObject.Find ("Screen First Loading"))
-				MonoBehaviour.Destroy (GameObject.Find ("Screen First Loading"));
-			AppCore.SetStatus(AppCore.Status.MENU);
-			break;
-		}
-
 		((SpriteRenderer)renderer).sprite = notPressedSprite;
 		if ((GameObject.Find ("Screen Main Menu").transform.position.x>=-3 && GameObject.Find ("Screen Main Menu").transform.position.x <= 3)
 		    || (GameObject.Find ("Screen Maps").transform.position.x>=-3 && GameObject.Find ("Screen Maps").transform.position.x <= 3))
