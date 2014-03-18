@@ -6,7 +6,6 @@ public class MenuButtonPressListener : MonoBehaviour {
 
 	public Sprite pressedSprite;
 	private Sprite notPressedSprite;
-	private float pressedTime;
 
 
 	void Start () {
@@ -26,8 +25,7 @@ public class MenuButtonPressListener : MonoBehaviour {
 			if (Physics.Raycast (ray, out hit, 100)) {
 				if(hit.collider.gameObject == gameObject)
 				{
-					((SpriteRenderer)renderer).sprite = pressedSprite;					
-					pressedTime = Time.time;
+					((SpriteRenderer)renderer).sprite = pressedSprite;	
 				}
 			}
 		}
@@ -52,8 +50,7 @@ public class MenuButtonPressListener : MonoBehaviour {
 			RaycastHit hit;				
 			if (Physics.Raycast (ray, out hit, 100)) {
 				if(hit.collider.gameObject == gameObject)
-				{										
-					pressedTime = 0;
+				{						
 					MenuItemClicked();
 				}
 			}

@@ -81,7 +81,7 @@ public class MenuScript : MonoBehaviour {
 				moveAndStopStopAtPosition(scMapsGO,V3_LEFT);
 				break;
 			case AppCore.Status.LOADING:
-				if(Time.time > (startTime + 2))
+				if(Time.time > (startTime + 5))
 				{
 					if(GameObject.Find ("Screen First Loading"))
 						MonoBehaviour.Destroy (GameObject.Find ("Screen First Loading"));
