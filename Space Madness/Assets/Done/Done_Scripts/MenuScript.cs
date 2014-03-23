@@ -10,10 +10,11 @@ public class MenuScript : MonoBehaviour {
 	private GameObject scLevelsIceGO;
 	private GameObject scLevelsDownGO;
 	private GameObject scLevelsSunGO;
-
+	private GameObject levelInfo;
 	private float startTime;
 	private float speed;
 	private Vector3 V3_LEFT = new Vector3 (-14f, 0.0f, 0.0f);
+	private Vector3 V3_CENTER_INFO = new Vector3 (0.0f, 0.0f, -5.0f);
 	private Vector3 V3_RIGHT = new Vector3 (14f, 0.0f, 0.0f);
 	private Vector3 V3_CENTER = Vector3.zero;
 	private Vector3 V3_DELTA = new Vector3 (0.2f, 0.0f, 0.0f);
@@ -29,6 +30,7 @@ public class MenuScript : MonoBehaviour {
 		scLevelsIceGO = GameObject.Find ("Screen Levels Ice");		
 		scLevelsSunGO = GameObject.Find ("Screen Levels Sun");
 		scLevelsDownGO = GameObject.Find ("Screen Levels Down");
+		levelInfo = GameObject.Find ("Level info");
 	}
 
 	private void moveAndStopStopAtPosition(GameObject go, Vector3 expectedPosition)
@@ -55,6 +57,7 @@ public class MenuScript : MonoBehaviour {
 				moveAndStopStopAtPosition(scLevelsIceGO,V3_RIGHT);
 				moveAndStopStopAtPosition(scLevelsDownGO,V3_RIGHT);
 				moveAndStopStopAtPosition(scLevelsSunGO,V3_RIGHT);
+				moveAndStopStopAtPosition(levelInfo,V3_LEFT);
 				break;
 			case AppCore.Status.MENU:				
 				moveAndStopStopAtPosition(scMainMenuGO,V3_CENTER);
@@ -64,22 +67,27 @@ public class MenuScript : MonoBehaviour {
 				moveAndStopStopAtPosition(scLevelsIceGO,V3_RIGHT);
 				moveAndStopStopAtPosition(scLevelsDownGO,V3_RIGHT);
 				moveAndStopStopAtPosition(scLevelsSunGO,V3_RIGHT);
+				moveAndStopStopAtPosition(levelInfo,V3_LEFT);
 				break;
 			case AppCore.Status.LEVELS_ICE:				
 				moveAndStopStopAtPosition(scLevelsIceGO,V3_CENTER);
 				moveAndStopStopAtPosition(scMapsGO,V3_LEFT);
+				moveAndStopStopAtPosition(levelInfo,V3_CENTER_INFO);
 				break;
 			case AppCore.Status.LEVELS_DOWN:				
 				moveAndStopStopAtPosition(scLevelsDownGO,V3_CENTER);			
 				moveAndStopStopAtPosition(scMapsGO,V3_LEFT);
+				moveAndStopStopAtPosition(levelInfo,V3_CENTER_INFO);
 				break;
 			case AppCore.Status.LEVELS_METEOR:
 				moveAndStopStopAtPosition(scLevelsMeteorGO,V3_CENTER);
 				moveAndStopStopAtPosition(scMapsGO,V3_LEFT);
+				moveAndStopStopAtPosition(levelInfo,V3_CENTER_INFO);
 				break;
 			case AppCore.Status.LEVELS_SUN:				
 				moveAndStopStopAtPosition(scLevelsSunGO,V3_CENTER);			
 				moveAndStopStopAtPosition(scMapsGO,V3_LEFT);
+				moveAndStopStopAtPosition(levelInfo,V3_CENTER_INFO);
 				break;
 			case AppCore.Status.LOADING:
 				if(Time.time > (startTime + 5) || Input.GetMouseButtonUp(0))
