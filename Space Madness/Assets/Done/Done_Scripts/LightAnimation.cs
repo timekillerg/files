@@ -11,6 +11,7 @@ public class LightAnimation : MonoBehaviour {
 	public Texture downLevelsFont;
 	public Texture sunLevelsFont;
 	public Texture mainFont;
+	public Texture gameLoadingFont;
 	public GameObject planMenu;
 	private Texture initialFont;
 		
@@ -62,6 +63,9 @@ public class LightAnimation : MonoBehaviour {
 			break;
 		case AppCore.Status.MAPS:
 			ChangeBackground(mainFont);
+			break;
+		case AppCore.Status.FAST_GAME:
+			ChangeBackground(gameLoadingFont);
 			break;
 		default:
 			planMenu.renderer.material.mainTexture = mainFont;

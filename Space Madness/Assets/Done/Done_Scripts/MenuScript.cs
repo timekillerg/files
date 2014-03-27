@@ -11,6 +11,7 @@ public class MenuScript : MonoBehaviour {
 	private GameObject scLevelsDownGO;
 	private GameObject scLevelsSunGO;
 	private GameObject levelInfo;
+	private GameObject scGameLoadingGO;
 	private float startTime;
 	private float speed;
 	private Vector3 V3_LEFT = new Vector3 (-14f, 0.0f, 0.0f);
@@ -31,6 +32,7 @@ public class MenuScript : MonoBehaviour {
 		scLevelsSunGO = GameObject.Find ("Screen Levels Sun");
 		scLevelsDownGO = GameObject.Find ("Screen Levels Down");
 		levelInfo = GameObject.Find ("Level info");
+		scGameLoadingGO = GameObject.Find ("Screen Game Loading");
 	}
 
 	private void moveAndStopStopAtPosition(GameObject go, Vector3 expectedPosition)
@@ -89,6 +91,11 @@ public class MenuScript : MonoBehaviour {
 				moveAndStopStopAtPosition(scMapsGO,V3_LEFT);
 				moveAndStopStopAtPosition(levelInfo,V3_CENTER_INFO);
 				break;
+			case AppCore.Status.FAST_GAME:				
+				moveAndStopStopAtPosition(scMainMenuGO,V3_LEFT);
+				moveAndStopStopAtPosition(scGameLoadingGO,V3_CENTER);
+				LoadFastGame();
+				break;
 			case AppCore.Status.LOADING:
 				if(Time.time > (startTime + 5) || Input.GetMouseButtonUp(0))
 				{
@@ -98,6 +105,13 @@ public class MenuScript : MonoBehaviour {
 				}
 				break;
 		}
+	}
+
+
+	private void LoadFastGame()
+	{
+		if (scGameLoadingGO.transform.position.x >= -0.2f && scGameLoadingGO.transform.position.x <= 0.2f)
+			Application.LoadLevelAsync (1);
 	}
 
 	private void LoadBackButtonEvents()

@@ -52,7 +52,7 @@ public class MenuButtonPressListener : MonoBehaviour {
 		switch(tag) {
 		case "FastGameStartButton":
 			AppCore.SetStatus(AppCore.Status.FAST_GAME);	
-			AppCore.Load();
+			//AppCore.Load();
 			break;
 		case "ExitGameButton":
 			AppCore.SetStatus(AppCore.Status.EXIT);	
