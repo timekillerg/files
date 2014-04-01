@@ -41,7 +41,11 @@ public class Done_GameController : MonoBehaviour
 		}
 		if (Input.GetKeyDown(KeyCode.Escape))			
 		{
-			AppCore.BackToMenu();
+			if(AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME)
+				AppCore.SetStatus(AppCore.Status.FAST_GAME_PAUSE);
+			else
+				if(AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME_PAUSE)
+					AppCore.SetStatus(AppCore.Status.FAST_GAME);
 		}
 	}
 	
