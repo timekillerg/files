@@ -13,7 +13,7 @@ public class MenuScript : MonoBehaviour {
 	private GameObject levelInfo;
 	private GameObject scGameLoadingGO;
 	private float startTime;
-	private float startGameTime = 0;
+	private float startGameTime = 0.0f;
 	private float speed;
 	private Vector3 V3_LEFT = new Vector3 (-14f, 0.0f, 0.0f);
 	private Vector3 V3_CENTER_INFO = new Vector3 (0.0f, 0.0f, -5.0f);

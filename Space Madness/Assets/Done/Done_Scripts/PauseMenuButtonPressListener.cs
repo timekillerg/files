@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using AssemblyCSharp;
 
 public class PauseMenuButtonPressListener : MonoBehaviour {
 	public Sprite buttonSprite;
@@ -52,9 +53,27 @@ public class PauseMenuButtonPressListener : MonoBehaviour {
 			if (Physics.Raycast (ray, out hit, 100)) {
 				if(hit.collider.gameObject == gameObject)
 				{						
-					//MenuItemClicked();
+					PauseMenuButtonClicked();
 				}
 			}
+		}
+	}
+
+	void PauseMenuButtonClicked()
+	{
+		switch (gameObject.name) {
+		case "Resume Pause Menu Button":
+			AppCore.SetStatus(AppCore.Status.FAST_GAME);
+			break;
+		case "Exit Pause Menu Button":
+			AppCore.SetStatus(AppCore.Status.MENU);
+			break;
+		case "Restart Pause Menu Button":
+			AppCore.SetStatus(AppCore.Status.RESTART_FAST_GAME);
+			break;
+		case "Sound Pause Menu Button":
+			//TODO
+			break;
 		}
 	}
 }

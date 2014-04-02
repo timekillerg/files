@@ -7,7 +7,7 @@ namespace AssemblyCSharp
 {
 	public class AppCore
 	{
-		public enum Status {LOADING, MENU, FAST_GAME, MAPS, LEVELS, SCORES, EXIT, LEVELS_METEOR, LEVELS_ICE, LEVELS_SUN,LEVELS_DOWN, FAST_GAME_PAUSE};
+		public enum Status {LOADING, MENU, FAST_GAME, MAPS, LEVELS, SCORES, EXIT, LEVELS_METEOR, LEVELS_ICE, LEVELS_SUN,LEVELS_DOWN, FAST_GAME_PAUSE, RESTART_FAST_GAME};
 		private static Status currentStatus;
 		private static bool isStart = true;
 		//Screens from Main Menu
