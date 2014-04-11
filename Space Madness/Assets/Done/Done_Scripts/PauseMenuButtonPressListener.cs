@@ -70,9 +70,9 @@ public class PauseMenuButtonPressListener : MonoBehaviour {
 			break;
 		case "Restart Pause Menu Button":
 			AppCore.SetStatus(AppCore.Status.RESTART_FAST_GAME);
-			break;
-		case "Sound Pause Menu Button":
-			//TODO
+			break;		
+		case "Top Pause Button":
+			AppCore.SetStatus(AppCore.Status.FAST_GAME_PAUSE);
 			break;
 		}
 	}

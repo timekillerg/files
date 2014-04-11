@@ -2,39 +2,53 @@
 using System.Collections;
 
 public class TouchMoveButtons : MonoBehaviour {
-
+	public Sprite buttonSprite;
+	public Sprite buttonSpritePressed;
+	private bool isPressed;
 	
-	void FixedUpdate ()
+	void Start () {
+		isPressed = false;
+		SetSprite ();
+	}
+
+	private void SetSprite()
 	{
-		if (Input.touchCount > 0) {
-			Ray ray = Camera.main.ScreenPointToRay (Input.GetTouch(0).position);
+		if(isPressed)
+			ChangeSprite(buttonSpritePressed);
+		else
+			ChangeSprite(buttonSprite);
+	}
+	
+	private void ChangeSprite(Sprite expSprite)
+	{
+		if(((SpriteRenderer)renderer).sprite != expSprite)
+			((SpriteRenderer)renderer).sprite = expSprite;
+	}
+	
+	void OnMouseDown()
+	{
+		if (Input.GetMouseButtonDown(0)) {
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			RaycastHit hit;				
-			if (Physics.Raycast (ray, out hit, 100)) {					
-				if (hit.collider.tag == "LeftButton") {
-					GameObject gm = GameObject.FindGameObjectsWithTag("LeftButton")[0];
-					gm.renderer.enabled = false;
-					gm = GameObject.FindGameObjectsWithTag("LeftButtonPressed")[0];
-					gm.renderer.enabled = true;
-
-
-				}					
-				if (hit.collider.tag == "RightButton") {
-					GameObject gm = GameObject.FindGameObjectsWithTag("RightButton")[0];
-					gm.renderer.enabled = false;
-					gm = GameObject.FindGameObjectsWithTag("RightButtonPressed")[0];
-					gm.renderer.enabled = true;
+			if (Physics.Raycast (ray, out hit, 100)) {
+				if(hit.collider.gameObject == gameObject)
+				{
+					isPressed = true;
+					SetSprite();
 				}
 			}
 		}
-		if (Input.touchCount == 0) {
-			GameObject gm = GameObject.FindGameObjectsWithTag("LeftButton")[0];
-			gm.renderer.enabled = true;
-			gm = GameObject.FindGameObjectsWithTag("RightButton")[0];
-			gm.renderer.enabled = true;
-			gm = GameObject.FindGameObjectsWithTag("LeftButtonPressed")[0];
-			gm.renderer.enabled = false;
-			gm = GameObject.FindGameObjectsWithTag("RightButtonPressed")[0];
-			gm.renderer.enabled = false;
-		}
+	}
+	
+	void OnMouseUp ()
+	{
+		isPressed = false;
+		SetSprite();
+	}
+
+	void OnMouseExit ()
+	{
+		isPressed = false;
+		SetSprite();
 	}
 }
