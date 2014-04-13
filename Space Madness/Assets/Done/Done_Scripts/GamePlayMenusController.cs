@@ -60,15 +60,7 @@ public class GamePlayMenusController : MonoBehaviour {
 				AppCore.SetStatus(AppCore.Status.FAST_GAME);
 				Application.LoadLevel(1);
 			}
-			break;
-		default:
-			MoveAndStopStopAtPosition(scPauseMenuGO,V3_LEFT);
-			if(scPauseMenuGO.transform.position.x <= -12)
-			{
-				AppCore.SetStatus(AppCore.Status.FAST_GAME);
-				ResumeGame();
-			}
-			break;
+			break;  
 		}
 	}
 }

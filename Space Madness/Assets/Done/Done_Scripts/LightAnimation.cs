@@ -67,6 +67,8 @@ public class LightAnimation : MonoBehaviour {
 		case AppCore.Status.FAST_GAME:
 			ChangeBackground(gameLoadingFont);
 			break;
+        case AppCore.Status.ANY_LEVEL:
+            break;
 		default:
 			planMenu.renderer.material.mainTexture = mainFont;
 			light.intensity = 0.5f;

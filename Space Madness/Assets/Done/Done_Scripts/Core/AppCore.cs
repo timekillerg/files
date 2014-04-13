@@ -1,4 +1,3 @@
-
 using System;
 using UnityEngine;
 using System.Collections;
@@ -7,7 +6,7 @@ namespace AssemblyCSharp
 {
 	public class AppCore
 	{
-		public enum Status {LOADING, MENU, FAST_GAME, MAPS, LEVELS, SCORES, EXIT, LEVELS_METEOR, LEVELS_ICE, LEVELS_SUN,LEVELS_DOWN, FAST_GAME_PAUSE, RESTART_FAST_GAME};
+        public enum Status { LOADING, MENU, FAST_GAME, MAPS, LEVELS, SCORES, EXIT, LEVELS_METEOR, LEVELS_ICE, LEVELS_SUN, LEVELS_DOWN, FAST_GAME_PAUSE, RESTART_FAST_GAME, ANY_LEVEL, ANY_LEVEL_PAUSE };
 		private static Status currentStatus;
 		private static bool isStart = true;
 		//Screens from Main Menu
@@ -52,7 +51,10 @@ namespace AssemblyCSharp
 			{
 			case Status.FAST_GAME:
 				Application.LoadLevel(1);
-				break;			
+				break;
+            case Status.ANY_LEVEL:
+                Application.LoadLevel(1);
+                break;
 			case Status.EXIT:
 				Application.Quit();
 				break;

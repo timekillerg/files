@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using AssemblyCSharp;
 
 public class LevelButtonPressListener : MonoBehaviour {	
 	public Sprite lockedLevelSprite;
@@ -99,9 +100,15 @@ public class LevelButtonPressListener : MonoBehaviour {
 			if (Physics.Raycast (ray, out hit, 100)) {
 				if(hit.collider.gameObject == gameObject)
 				{						
-					//MenuItemClicked();
+					LevelButtonClicked();
 				}
 			}
 		}
 	}
+
+    private void LevelButtonClicked()
+    {
+        AppCore.SetStatus(AppCore.Status.ANY_LEVEL);
+        GameCore.Initialize(gameObject.transform.parent.gameObject.name);
+    }
 }

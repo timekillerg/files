@@ -43,9 +43,12 @@ public class Done_GameController : MonoBehaviour
 		{
 			if(AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME)
 				AppCore.SetStatus(AppCore.Status.FAST_GAME_PAUSE);
-			else
-				if(AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME_PAUSE)
+			else if(AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME_PAUSE)
 					AppCore.SetStatus(AppCore.Status.FAST_GAME);
+            else if (AppCore.GetCurrentStatus() == AppCore.Status.ANY_LEVEL)
+                AppCore.SetStatus(AppCore.Status.ANY_LEVEL_PAUSE);
+            else if (AppCore.GetCurrentStatus() == AppCore.Status.ANY_LEVEL_PAUSE)
+                AppCore.SetStatus(AppCore.Status.ANY_LEVEL);
 		}
 	}
 	

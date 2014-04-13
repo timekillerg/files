@@ -97,6 +97,25 @@ public class MenuScript : MonoBehaviour {
 				moveAndStopStopAtPosition(scGameLoadingGO,V3_CENTER);
 				LoadFastGame();
 				break;
+            case AppCore.Status.ANY_LEVEL:
+                switch (GameCore.mapType)
+                {
+                    case  Maps.IceAnomaly:
+                       moveAndStopStopAtPosition(scLevelsIceGO, V3_LEFT);
+                       break;
+                    case Maps.DownFall:
+                       moveAndStopStopAtPosition(scLevelsDownGO, V3_LEFT);
+                       break;
+                    case Maps.MeteorRain:
+                       moveAndStopStopAtPosition(scLevelsMeteorGO, V3_LEFT);
+                       break;
+                    case Maps.SunStorm:
+                       moveAndStopStopAtPosition(scLevelsSunGO, V3_LEFT);
+                       break;
+                }
+                moveAndStopStopAtPosition(scGameLoadingGO, V3_CENTER);
+                LoadFastGame();
+                break;
 			case AppCore.Status.LOADING:
 				if(Time.time > (startTime + 5) || Input.GetMouseButtonUp(0))
 				{
