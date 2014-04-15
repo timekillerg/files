@@ -12,6 +12,9 @@ namespace AssemblyCSharp
 
         private static GameParameters gameParameters;
 
+        public static bool isShowStartCountDown = false;
+        public static float timeScale = 0.0f;
+
         public static GameParameters GameParameters
         {
             get { return gameParameters; }

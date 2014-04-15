@@ -40,11 +40,11 @@ public class GamePlayMenusController : MonoBehaviour {
 	{
 		switch(AppCore.GetCurrentStatus())
 		{
-		case AppCore.Status.FAST_GAME_PAUSE:
+		case AppCore.Status.FAST_GAME_PAUSE:           
 			StopGame();
 			MoveAndStopStopAtPosition(scPauseMenuGO,V3_CENTER);
 			break;
-		case AppCore.Status.MENU:			
+		case AppCore.Status.MENU:           
 			MoveAndStopStopAtPosition(scPauseMenuGO,V3_LEFT);
 			if(scPauseMenuGO.transform.position.x <= -12)
 			{
@@ -52,15 +52,25 @@ public class GamePlayMenusController : MonoBehaviour {
 				AppCore.BackToMenu();
 			}
 			break;
-		case AppCore.Status.RESTART_FAST_GAME:
+		case AppCore.Status.RESTART_FAST_GAME:            
 			MoveAndStopStopAtPosition(scPauseMenuGO,V3_LEFT);
 			if(scPauseMenuGO.transform.position.x <= -12)
 			{
-				ResumeGame();				
+				ResumeGame();
 				AppCore.SetStatus(AppCore.Status.FAST_GAME);
 				Application.LoadLevel(1);
 			}
-			break;  
+			break;
+        case AppCore.Status.FAST_GAME:
+            if (GameCore.isShowStartCountDown)
+            {
+                MoveAndStopStopAtPosition(scPauseMenuGO, V3_LEFT);
+                if (scPauseMenuGO.transform.position.x <= -12)
+                {
+                    GameCore.timeScale = timeScale;
+                }
+            }
+            break;
 		}
 	}
 }

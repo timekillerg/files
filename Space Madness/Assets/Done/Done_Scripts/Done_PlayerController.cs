@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using AssemblyCSharp;
 
 [System.Serializable]
 public class Done_Boundary 
@@ -18,10 +19,15 @@ public class Done_PlayerController : MonoBehaviour
 	public float fireRate;
 	 
 	private float nextFire;
+
+    void Start()
+    {
+        nextFire = Time.time + 0.5f;
+    }
 	
 	void Update ()
 	{
-		if (Time.time > nextFire) 
+		if (Time.time > nextFire && !GameCore.isShowStartCountDown) 
 		{
 			nextFire = Time.time + fireRate;
 			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
@@ -89,5 +95,4 @@ public class Done_PlayerController : MonoBehaviour
 		}
 		rigidbody.rotation = Quaternion.Euler (0.0f, 0.0f, rigidbody.velocity.x * -tilt);
 	}
-
 }

@@ -17,6 +17,4 @@ public class AppearMenuButtons : MonoBehaviour {
 				Mathf.Clamp (rigidbody.position.z, -50.0f, 50.0f)
 			);
 	}
-	
-
 }

@@ -2,7 +2,8 @@
 using System.Collections;
 using AssemblyCSharp;
 
-public class PauseMenuButtonPressListener : MonoBehaviour {
+public class PauseMenuButtonPressListener : MonoBehaviour
+{
 	public Sprite buttonSprite;
 	public Sprite buttonSpritePressed;
 
@@ -32,6 +33,9 @@ public class PauseMenuButtonPressListener : MonoBehaviour {
 	
 	void OnMouseDown()
 	{
+        if (gameObject.name == "Top Pause Button" && Time.timeScale == 0.0f)
+            return;
+
 		if (Input.GetMouseButtonDown(0)) {
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			RaycastHit hit;				
@@ -46,6 +50,8 @@ public class PauseMenuButtonPressListener : MonoBehaviour {
 	
 	void OnMouseUp ()
 	{
+        if (gameObject.name == "Top Pause Button" && Time.timeScale == 0.0f)
+            return;
 		SetSprite(false);
 		if (Input.GetMouseButtonUp(0)) {
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -63,6 +69,7 @@ public class PauseMenuButtonPressListener : MonoBehaviour {
 	{
 		switch (gameObject.name) {
 		case "Resume Pause Menu Button":
+            GameCore.isShowStartCountDown = true;
 			AppCore.SetStatus(AppCore.Status.FAST_GAME);
 			break;
 		case "Exit Pause Menu Button":
