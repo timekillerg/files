@@ -181,16 +181,20 @@ namespace AssemblyCSharp
                     mapType = Maps.IceAnomaly;
                     gameParameters = new GameParameters();
                     gameParameters.Acceleration = 15f;
-
                     gameTask = new GameTask();
                     gameTask.CountEnemiesToDestroy = 10;
                     gameTask.CountMeteorsToDestroy = 20;
                     gameTask.SurviveTime = 0;
                     break;
                 default:
-                    mapType = Maps.MeteorRain;
+                    mapType = Maps.SunStorm;
                     gameParameters = new GameParameters();
+                    gameParameters.Acceleration = 1;
+
                     gameTask = new GameTask();
+                    gameTask.CountEnemiesToDestroy = 5;
+                    gameTask.CountMeteorsToDestroy = 10;
+                    gameTask.SurviveTime = 0;
                     break;
             }
                  
