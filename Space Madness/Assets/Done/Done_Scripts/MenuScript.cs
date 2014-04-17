@@ -26,7 +26,7 @@ public class MenuScript : MonoBehaviour {
 		startTime = Time.time;
 		speed = 3.2f;		
 		scMainMenuGO = GameObject.Find("Screen Main Menu");
-		scMapsGO = GameObject.Find("Screen Maps");	
+		scMapsGO = GameObject.Find("Screen Maps");
 		scScoresGO = GameObject.Find("Screen Scores");	
 		scLevelsMeteorGO = GameObject.Find ("Screen Levels Meteor");	
 		scLevelsIceGO = GameObject.Find ("Screen Levels Ice");		
@@ -95,9 +95,10 @@ public class MenuScript : MonoBehaviour {
 			case AppCore.Status.FAST_GAME:
 				moveAndStopStopAtPosition(scMainMenuGO,V3_LEFT);
 				moveAndStopStopAtPosition(scGameLoadingGO,V3_CENTER);
-				LoadFastGame();
+				LoadGame();
 				break;
             case AppCore.Status.ANY_LEVEL:
+                moveAndStopStopAtPosition(levelInfo, V3_LEFT);
                 switch (GameCore.mapType)
                 {
                     case  Maps.IceAnomaly:
@@ -114,7 +115,7 @@ public class MenuScript : MonoBehaviour {
                        break;
                 }
                 moveAndStopStopAtPosition(scGameLoadingGO, V3_CENTER);
-                LoadFastGame();
+                LoadGame();
                 break;
 			case AppCore.Status.LOADING:
 				if(Time.time > (startTime + 5) || Input.GetMouseButtonUp(0))
@@ -128,7 +129,7 @@ public class MenuScript : MonoBehaviour {
 	}
 
 
-	private void LoadFastGame()
+    private void LoadGame()
 	{
 		if(startGameTime == 0)
 			startGameTime = Time.time;

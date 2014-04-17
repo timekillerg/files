@@ -40,7 +40,8 @@ public class GamePlayMenusController : MonoBehaviour {
 	{
 		switch(AppCore.GetCurrentStatus())
 		{
-		case AppCore.Status.FAST_GAME_PAUSE:           
+		case AppCore.Status.FAST_GAME_PAUSE:
+        case AppCore.Status.ANY_LEVEL_PAUSE:
 			StopGame();
 			MoveAndStopStopAtPosition(scPauseMenuGO,V3_CENTER);
 			break;
@@ -52,6 +53,17 @@ public class GamePlayMenusController : MonoBehaviour {
 				AppCore.BackToMenu();
 			}
 			break;
+        case AppCore.Status.LEVELS_DOWN:
+        case AppCore.Status.LEVELS_ICE:
+        case AppCore.Status.LEVELS_METEOR:
+        case AppCore.Status.LEVELS_SUN:
+            MoveAndStopStopAtPosition(scPauseMenuGO, V3_LEFT);
+            if (scPauseMenuGO.transform.position.x <= -12)
+            {
+                ResumeGame();
+                AppCore.BackToMenu();
+            }
+            break;
 		case AppCore.Status.RESTART_FAST_GAME:            
 			MoveAndStopStopAtPosition(scPauseMenuGO,V3_LEFT);
 			if(scPauseMenuGO.transform.position.x <= -12)
@@ -61,7 +73,26 @@ public class GamePlayMenusController : MonoBehaviour {
 				Application.LoadLevel(1);
 			}
 			break;
+        case AppCore.Status.RESTART_ANY_LEVEL:
+            MoveAndStopStopAtPosition(scPauseMenuGO, V3_LEFT);
+            if (scPauseMenuGO.transform.position.x <= -12)
+            {
+                ResumeGame();
+                AppCore.SetStatus(AppCore.Status.ANY_LEVEL);
+                Application.LoadLevel(1);
+            }
+            break;
         case AppCore.Status.FAST_GAME:
+            if (GameCore.isShowStartCountDown)
+            {
+                MoveAndStopStopAtPosition(scPauseMenuGO, V3_LEFT);
+                if (scPauseMenuGO.transform.position.x <= -12)
+                {
+                    GameCore.timeScale = timeScale;
+                }
+            }
+            break;
+        case AppCore.Status.ANY_LEVEL:
             if (GameCore.isShowStartCountDown)
             {
                 MoveAndStopStopAtPosition(scPauseMenuGO, V3_LEFT);

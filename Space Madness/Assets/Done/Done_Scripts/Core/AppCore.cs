@@ -6,7 +6,7 @@ namespace AssemblyCSharp
 {
 	public class AppCore
 	{
-        public enum Status { LOADING, MENU, FAST_GAME, MAPS, LEVELS, SCORES, EXIT, LEVELS_METEOR, LEVELS_ICE, LEVELS_SUN, LEVELS_DOWN, FAST_GAME_PAUSE, RESTART_FAST_GAME, ANY_LEVEL, ANY_LEVEL_PAUSE };
+        public enum Status { LOADING, MENU, FAST_GAME, MAPS, LEVELS, SCORES, EXIT, LEVELS_METEOR, LEVELS_ICE, LEVELS_SUN, LEVELS_DOWN, FAST_GAME_PAUSE, RESTART_FAST_GAME, ANY_LEVEL, ANY_LEVEL_PAUSE, RESTART_ANY_LEVEL };
 		private static Status currentStatus;
 		private static bool isStart = true;
 		//Screens from Main Menu
@@ -18,6 +18,8 @@ namespace AssemblyCSharp
 		private static GameObject goSunLevel;
 		private static GameObject goIceLevel;
 		private static GameObject goDownLevel;
+
+        private static Vector3 V3_LEFT = new Vector3(-14f, 0.0f, 0.0f);
 
 
 		public static void SetStatus(Status status)
@@ -37,9 +39,17 @@ namespace AssemblyCSharp
 			}
 			else 
 			{
-				if(GameObject.Find ("Screen First Loading"))
-					MonoBehaviour.Destroy (GameObject.Find ("Screen First Loading"));
-				currentStatus = Status.MENU;
+                if (GameObject.Find("Screen First Loading"))
+                {
+                    MonoBehaviour.Destroy(GameObject.Find("Screen First Loading"));                    
+                }
+                if (currentStatus != Status.LEVELS_METEOR && currentStatus != Status.LEVELS_SUN && currentStatus != Status.LEVELS_ICE && currentStatus != Status.LEVELS_DOWN)
+                    currentStatus = Status.MENU;
+                else
+                {
+                    GameObject.Find("Screen Main Menu").transform.position = V3_LEFT;
+                    GameObject.Find("Screen Maps").transform.position = V3_LEFT;
+                }
 			}
 		}
 		

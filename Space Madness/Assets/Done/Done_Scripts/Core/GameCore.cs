@@ -187,14 +187,16 @@ namespace AssemblyCSharp
                     gameTask.SurviveTime = 0;
                     break;
                 default:
-                    mapType = Maps.SunStorm;
+                    if(levelButtonName.Contains("Meteor Level"))
+                        mapType = Maps.MeteorRain;
+                    else if (levelButtonName.Contains("Ice Level"))
+                        mapType = Maps.IceAnomaly;
+                    else if (levelButtonName.Contains("Sun Level"))
+                        mapType = Maps.SunStorm;
+                    else if (levelButtonName.Contains("Down Level"))
+                        mapType = Maps.DownFall;
                     gameParameters = new GameParameters();
-                    gameParameters.Acceleration = 1;
-
                     gameTask = new GameTask();
-                    gameTask.CountEnemiesToDestroy = 5;
-                    gameTask.CountMeteorsToDestroy = 10;
-                    gameTask.SurviveTime = 0;
                     break;
             }
                  
