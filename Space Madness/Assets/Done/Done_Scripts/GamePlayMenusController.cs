@@ -4,6 +4,7 @@ using AssemblyCSharp;
 
 public class GamePlayMenusController : MonoBehaviour {
 	public GameObject scPauseMenuGO;
+    public GameObject scFastGameOverGO;
 	private float speed;
 	private Vector3 V3_LEFT = new Vector3 (-14f, 0.0f, 6.0f);
 	private Vector3 V3_CENTER = new Vector3 (0.0f, 0.0f, 6.0f);
@@ -101,6 +102,11 @@ public class GamePlayMenusController : MonoBehaviour {
                     GameCore.timeScale = timeScale;
                 }
             }
+            break;
+         case AppCore.Status.FAST_GAME_OVER:
+            //StopGame();
+            speed = 2f;
+            MoveAndStopStopAtPosition(scFastGameOverGO, V3_CENTER);
             break;
 		}
 	}

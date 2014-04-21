@@ -9,6 +9,7 @@ namespace AssemblyCSharp
 	public static class GameCore
 	{
         public static Maps mapType;
+        public static String levelName;
 
         private static GameParameters gameParameters;
 
@@ -30,6 +31,7 @@ namespace AssemblyCSharp
 
         public static void Initialize(String levelButtonName)
         {
+            levelName = levelButtonName;
             InitializeGameParamters(levelButtonName);
         }
 

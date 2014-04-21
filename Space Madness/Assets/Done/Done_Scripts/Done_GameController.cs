@@ -12,7 +12,6 @@ public class Done_GameController : MonoBehaviour
 	public float waveWait;
 	
 	public GUIText scoreText;
-	public GUIText restartText;
 	public GUIText gameOverText;
 	
 	private bool gameOver;
@@ -23,7 +22,6 @@ public class Done_GameController : MonoBehaviour
 	{
 		gameOver = false;
 		restart = false;
-		restartText.text = "";
 		gameOverText.text = "";
 		score = 0;
 		UpdateScore ();
@@ -55,21 +53,23 @@ public class Done_GameController : MonoBehaviour
 	IEnumerator SpawnWaves ()
 	{
 		yield return new WaitForSeconds (startWait);
-		while (true)
+        while (true)
 		{
 			for (int i = 0; i < hazardCount; i++)
 			{
 				GameObject hazard = hazards [Random.Range (0, hazards.Length)];
 				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 				Quaternion spawnRotation = Quaternion.identity;
-				Instantiate (hazard, spawnPosition, spawnRotation);
+                
+                if(AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME || AppCore.GetCurrentStatus() == AppCore.Status.ANY_LEVEL)
+				    Instantiate (hazard, spawnPosition, spawnRotation);
+
 				yield return new WaitForSeconds (spawnWait);
 			}
 			yield return new WaitForSeconds (waveWait);
 			
 			if (gameOver)
-			{
-				restartText.text = "Press 'R' for Restart";
+			{				
 				restart = true;
 				break;
 			}
@@ -89,7 +89,11 @@ public class Done_GameController : MonoBehaviour
 	
 	public void GameOver ()
 	{
-		gameOverText.text = "Game Over!";
-		gameOver = true;
+        //gameOverText.text = "Game Over!";
+        gameOver = true;
+        if (AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME)
+            AppCore.SetStatus(AppCore.Status.FAST_GAME_OVER);
+        else if (AppCore.GetCurrentStatus() == AppCore.Status.ANY_LEVEL)
+            AppCore.SetStatus(AppCore.Status.ANY_LEVEL_LOSE);
 	}
 }
