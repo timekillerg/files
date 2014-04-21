@@ -37,14 +37,14 @@ public class Done_GameController : MonoBehaviour
 		}
 		if (Input.GetKeyDown(KeyCode.Escape))			
 		{
-			if(AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME)
-				AppCore.SetStatus(AppCore.Status.FAST_GAME_PAUSE);
-			else if(AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME_PAUSE)
-					AppCore.SetStatus(AppCore.Status.FAST_GAME);
-            else if (AppCore.GetCurrentStatus() == AppCore.Status.ANY_LEVEL)
-                AppCore.SetStatus(AppCore.Status.ANY_LEVEL_PAUSE);
-            else if (AppCore.GetCurrentStatus() == AppCore.Status.ANY_LEVEL_PAUSE)
-                AppCore.SetStatus(AppCore.Status.ANY_LEVEL);
+			if(AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
+				AppCore.CurrentStatus = AppCore.Status.FAST_GAME_PAUSE;
+            else if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME_PAUSE)
+					AppCore.CurrentStatus = AppCore.Status.FAST_GAME;
+            else if (AppCore.CurrentStatus  == AppCore.Status.ANY_LEVEL)
+                AppCore.CurrentStatus = AppCore.Status.ANY_LEVEL_PAUSE;
+            else if (AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL_PAUSE)
+                AppCore.CurrentStatus = AppCore.Status.ANY_LEVEL;
 		}
 	}
 	
@@ -59,7 +59,7 @@ public class Done_GameController : MonoBehaviour
 				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 				Quaternion spawnRotation = Quaternion.identity;
                 
-                if(AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME || AppCore.GetCurrentStatus() == AppCore.Status.ANY_LEVEL)
+                if(AppCore.CurrentStatus == AppCore.Status.FAST_GAME || AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL)
 				    Instantiate (hazard, spawnPosition, spawnRotation);
 
 				yield return new WaitForSeconds (spawnWait);
@@ -89,9 +89,9 @@ public class Done_GameController : MonoBehaviour
 	{
         //gameOverText.text = "Game Over!";
         gameOver = true;
-        if (AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME)
-            AppCore.SetStatus(AppCore.Status.FAST_GAME_OVER);
-        else if (AppCore.GetCurrentStatus() == AppCore.Status.ANY_LEVEL)
-            AppCore.SetStatus(AppCore.Status.ANY_LEVEL_LOSE);
+        if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
+            AppCore.CurrentStatus = AppCore.Status.FAST_GAME_OVER;
+        else if (AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL)
+            AppCore.CurrentStatus = AppCore.Status.ANY_LEVEL_LOSE;
 	}
 }

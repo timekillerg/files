@@ -16,11 +16,11 @@ public class BackgroundController : MonoBehaviour {
 
     private void ChangeBackround()
     {
-        if (AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME)
+        if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
         {
             this.renderer.material.mainTexture = fastGameBackground;
         }
-        else if (AppCore.GetCurrentStatus() == AppCore.Status.ANY_LEVEL)
+        else if (AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL)
         {
             switch (GameCore.mapType)
             {

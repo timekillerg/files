@@ -8,9 +8,9 @@ public class Done_Mover : MonoBehaviour
 
 	void Start ()
 	{
-      if (AppCore.GetCurrentStatus() == AppCore.Status.ANY_LEVEL)
+      if (AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL)
            rigidbody.velocity = transform.forward * speed * GameCore.GameParameters.Acceleration;
-      if (AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME)
+      if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
           rigidbody.velocity = transform.forward * speed;
     }
 }

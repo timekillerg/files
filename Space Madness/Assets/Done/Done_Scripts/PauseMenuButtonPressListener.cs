@@ -70,47 +70,47 @@ public class PauseMenuButtonPressListener : MonoBehaviour
 		switch (gameObject.name) {
 		case "Resume Pause Menu Button":        
             GameCore.isShowStartCountDown = true;
-                if(AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME_PAUSE)
-			        AppCore.SetStatus(AppCore.Status.FAST_GAME);
-                else if(AppCore.GetCurrentStatus() == AppCore.Status.ANY_LEVEL_PAUSE)
-                    AppCore.SetStatus(AppCore.Status.ANY_LEVEL);
+                if(AppCore.CurrentStatus == AppCore.Status.FAST_GAME_PAUSE)
+			        AppCore.CurrentStatus = AppCore.Status.FAST_GAME;
+                else if(AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL_PAUSE)
+                    AppCore.CurrentStatus =AppCore.Status.ANY_LEVEL;
 			break;
 
 		case "Exit Pause Menu Button":
         case "Game Over Exit Button":
-            if (AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME_PAUSE || AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME_OVER)
-			    AppCore.SetStatus(AppCore.Status.MENU);
-            else if (AppCore.GetCurrentStatus() == AppCore.Status.ANY_LEVEL_PAUSE)
+            if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME_PAUSE || AppCore.CurrentStatus == AppCore.Status.FAST_GAME_OVER)
+                AppCore.CurrentStatus = AppCore.Status.MENU;
+            else if (AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL_PAUSE)
             {
                 switch (GameCore.mapType)
                 {
                     case Maps.DownFall:
-                        AppCore.SetStatus(AppCore.Status.LEVELS_DOWN);
+                        AppCore.CurrentStatus = AppCore.Status.LEVELS_DOWN;
                         break;
                     case Maps.IceAnomaly:
-                        AppCore.SetStatus(AppCore.Status.LEVELS_ICE);
+                        AppCore.CurrentStatus = AppCore.Status.LEVELS_ICE;
                         break;
                     case Maps.SunStorm:
-                        AppCore.SetStatus(AppCore.Status.LEVELS_SUN);
+                        AppCore.CurrentStatus = AppCore.Status.LEVELS_SUN;
                         break;
                     case Maps.MeteorRain:
-                        AppCore.SetStatus(AppCore.Status.LEVELS_METEOR);
+                        AppCore.CurrentStatus = AppCore.Status.LEVELS_METEOR;
                         break;
                 }
             }
 			break;
 		case "Restart Pause Menu Button":
         case "Game Over Restart Button":
-            if (AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME_PAUSE || AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME_OVER)
-                AppCore.SetStatus(AppCore.Status.RESTART_FAST_GAME);
-            else if (AppCore.GetCurrentStatus() == AppCore.Status.ANY_LEVEL_PAUSE)
-                AppCore.SetStatus(AppCore.Status.RESTART_ANY_LEVEL);
+            if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME_PAUSE || AppCore.CurrentStatus == AppCore.Status.FAST_GAME_OVER)
+                AppCore.CurrentStatus =AppCore.Status.RESTART_FAST_GAME;
+            else if (AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL_PAUSE)
+                AppCore.CurrentStatus = AppCore.Status.RESTART_ANY_LEVEL;
 			break;		
 		case "Top Pause Button":
-                if(AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME)
-                    AppCore.SetStatus(AppCore.Status.FAST_GAME_PAUSE);
-                else if(AppCore.GetCurrentStatus() == AppCore.Status.ANY_LEVEL)
-                    AppCore.SetStatus(AppCore.Status.ANY_LEVEL_PAUSE);
+            if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
+                    AppCore.CurrentStatus = AppCore.Status.FAST_GAME_PAUSE;
+            else if (AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL)
+                    AppCore.CurrentStatus = AppCore.Status.ANY_LEVEL_PAUSE;
 			break;
 		}
 	}

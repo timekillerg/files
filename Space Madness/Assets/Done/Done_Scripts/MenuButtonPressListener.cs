@@ -51,30 +51,30 @@ public class MenuButtonPressListener : MonoBehaviour {
 	void MenuItemClicked() {
 		switch(tag) {
 		case "FastGameStartButton":
-			AppCore.SetStatus(AppCore.Status.FAST_GAME);	
+			AppCore.CurrentStatus = AppCore.Status.FAST_GAME;	
 			//AppCore.Load();
 			break;
 		case "ExitGameButton":
-			AppCore.SetStatus(AppCore.Status.EXIT);	
+            AppCore.CurrentStatus = AppCore.Status.EXIT;
 			AppCore.Load();
 			break;
 		case "HistoryButton":
-			AppCore.SetStatus(AppCore.Status.MAPS);	
+            AppCore.CurrentStatus = AppCore.Status.MAPS;	
 			break;
 		case "ScoresButton":
-			AppCore.SetStatus(AppCore.Status.SCORES);
+            AppCore.CurrentStatus = AppCore.Status.SCORES;
 			break;
 		case "DownMapButton":
-			AppCore.SetStatus(AppCore.Status.LEVELS_DOWN);
+            AppCore.CurrentStatus = AppCore.Status.LEVELS_DOWN;
 			break;
 		case "SunMapButton":
-			AppCore.SetStatus(AppCore.Status.LEVELS_SUN);
+            AppCore.CurrentStatus = AppCore.Status.LEVELS_SUN;
 			break;
 		case "IceMapButton":
-			AppCore.SetStatus(AppCore.Status.LEVELS_ICE);
+            AppCore.CurrentStatus = AppCore.Status.LEVELS_ICE;
 			break;
 		case "MeteorMapButton":
-			AppCore.SetStatus(AppCore.Status.LEVELS_METEOR);
+			AppCore.CurrentStatus =AppCore.Status.LEVELS_METEOR;
 			break;
 		}
 	}

@@ -17,7 +17,7 @@ public class LevelInfoScript : MonoBehaviour {
 
 	void Update()
 	{
-		switch(AppCore.GetCurrentStatus())
+        switch (AppCore.CurrentStatus)
 		{
 		case AppCore.Status.LEVELS_ICE:				
 			ChangeLevelInfo(iceLevelSprite);

@@ -47,7 +47,7 @@ public class MenuScript : MonoBehaviour {
 	void Update()
 	{
 		LoadBackButtonEvents ();
-		switch(AppCore.GetCurrentStatus())
+		switch(AppCore.CurrentStatus)
 		{
 			case AppCore.Status.SCORES:
 				moveAndStopStopAtPosition(scScoresGO,V3_CENTER);
@@ -122,7 +122,7 @@ public class MenuScript : MonoBehaviour {
 				{
 					if(GameObject.Find ("Screen First Loading"))
 						MonoBehaviour.Destroy (GameObject.Find ("Screen First Loading"));
-					AppCore.SetStatus(AppCore.Status.MENU);
+					AppCore.CurrentStatus = AppCore.Status.MENU;
 				}
 				break;
 		}

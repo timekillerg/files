@@ -43,7 +43,7 @@ public class LightAnimation : MonoBehaviour {
 	
 	void IntensityChanging ()
 	{
-		switch(AppCore.GetCurrentStatus())
+        switch (AppCore.CurrentStatus)
 		{
 		case AppCore.Status.LOADING:
 			if(Time.time > (startTime+0.75))

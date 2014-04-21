@@ -108,7 +108,7 @@ public class LevelButtonPressListener : MonoBehaviour {
 
     private void LevelButtonClicked()
     {
-        AppCore.SetStatus(AppCore.Status.ANY_LEVEL);
+        AppCore.CurrentStatus = AppCore.Status.ANY_LEVEL;
         GameCore.Initialize(gameObject.transform.parent.gameObject.name);
     }
 }
