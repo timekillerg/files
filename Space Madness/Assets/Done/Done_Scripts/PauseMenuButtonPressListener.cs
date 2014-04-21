@@ -68,7 +68,7 @@ public class PauseMenuButtonPressListener : MonoBehaviour
 	void PauseMenuButtonClicked()
 	{
 		switch (gameObject.name) {
-		case "Resume Pause Menu Button":
+		case "Resume Pause Menu Button":        
             GameCore.isShowStartCountDown = true;
                 if(AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME_PAUSE)
 			        AppCore.SetStatus(AppCore.Status.FAST_GAME);
@@ -77,7 +77,8 @@ public class PauseMenuButtonPressListener : MonoBehaviour
 			break;
 
 		case "Exit Pause Menu Button":
-            if (AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME_PAUSE)
+        case "Game Over Exit Button":
+            if (AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME_PAUSE || AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME_OVER)
 			    AppCore.SetStatus(AppCore.Status.MENU);
             else if (AppCore.GetCurrentStatus() == AppCore.Status.ANY_LEVEL_PAUSE)
             {
@@ -99,7 +100,8 @@ public class PauseMenuButtonPressListener : MonoBehaviour
             }
 			break;
 		case "Restart Pause Menu Button":
-            if (AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME_PAUSE)
+        case "Game Over Restart Button":
+            if (AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME_PAUSE || AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME_OVER)
                 AppCore.SetStatus(AppCore.Status.RESTART_FAST_GAME);
             else if (AppCore.GetCurrentStatus() == AppCore.Status.ANY_LEVEL_PAUSE)
                 AppCore.SetStatus(AppCore.Status.RESTART_ANY_LEVEL);

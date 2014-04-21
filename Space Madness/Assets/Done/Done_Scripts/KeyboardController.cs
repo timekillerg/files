@@ -10,11 +10,21 @@ public class KeyboardController : MonoBehaviour {
     {
         keyboard = new TouchScreenKeyboard("", TouchScreenKeyboardType.Default, true, true, false, false, "");
         keyboard.active = false;
-	}	
-	
-	void Update () 
-    {
-        if(AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME_OVER)
-            TouchScreenKeyboard.Open("",TouchScreenKeyboardType.Default,true,false,false,false,"username");
 	}
+
+    void OnMouseDown()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 100))
+            {
+                if (hit.collider.gameObject == gameObject)
+                {                   
+                   TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, true, false, false, false, "Enter your name");
+                }
+            }
+        }
+    }
 }

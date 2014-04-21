@@ -12,7 +12,6 @@ public class Done_GameController : MonoBehaviour
 	public float waveWait;
 	
 	public GUIText scoreText;
-	public GUIText gameOverText;
 	
 	private bool gameOver;
 	private bool restart;
@@ -22,7 +21,6 @@ public class Done_GameController : MonoBehaviour
 	{
 		gameOver = false;
 		restart = false;
-		gameOverText.text = "";
 		score = 0;
 		UpdateScore ();
 		StartCoroutine (SpawnWaves ());

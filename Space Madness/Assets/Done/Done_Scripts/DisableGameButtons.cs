@@ -35,12 +35,12 @@ public class DisableGameButtons : MonoBehaviour {
 
     void Update()
     {
-        if (Time.timeScale == 0.0f)
+        if (Time.timeScale == 0.0f || AppCore.GetCurrentStatus() == AppCore.Status.FAST_GAME_OVER)
         {
             MoveAndStopStopAtPosition(this.gameObject, V3_ON_SCREEN);
         }
 
-        if (Time.timeScale != 0.0f && !GameCore.isShowStartCountDown)
+        if (Time.timeScale != 0.0f && !GameCore.isShowStartCountDown && AppCore.GetCurrentStatus() != AppCore.Status.FAST_GAME_OVER)
         {
             MoveAndStopStopAtPosition(this.gameObject, V3_HIDEN);
         }
