@@ -21,7 +21,8 @@ public class KeyboardController : MonoBehaviour {
             if (Physics.Raycast(ray, out hit, 100))
             {
                 if (hit.collider.gameObject == gameObject)
-                {                   
+                {
+                    Debug.Log("Keyboard appeared");
                    TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, true, false, false, false, "Enter your name");
                 }
             }

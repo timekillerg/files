@@ -86,8 +86,7 @@ public class Done_GameController : MonoBehaviour
 	}
 	
 	public void GameOver ()
-	{
-        //gameOverText.text = "Game Over!";
+	{        
         gameOver = true;
         if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
             AppCore.CurrentStatus = AppCore.Status.FAST_GAME_OVER;

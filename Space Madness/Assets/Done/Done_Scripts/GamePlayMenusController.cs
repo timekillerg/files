@@ -4,13 +4,10 @@ using AssemblyCSharp;
 
 public class GamePlayMenusController : MonoBehaviour {
 	public GameObject scPauseMenuGO;
-
     public GameObject scFastGameOverMenuGO;
     public GameObject scFastGameOverTextGO;
-    public GameObject gameOverUsernameTextField;
-    public GameObject gameOverScoreTextField;
-
-
+    public GUIText gameOverUsernameTextField;
+    public GUIText gameOverScoreTextField;
 	private float speed;
 	private Vector3 V3_LEFT = new Vector3 (-14f, 0.0f, 6.0f);
 	private Vector3 V3_CENTER = new Vector3 (0.0f, 0.0f, 6.0f);
@@ -29,9 +26,17 @@ public class GamePlayMenusController : MonoBehaviour {
 	
 	void Start () {
 		speed = 3f;
-        gameOverUsernameTextField.SetActive(false);
-        gameOverScoreTextField.SetActive(false);
+        gameOverUsernameTextField.text = " ";
+        gameOverScoreTextField.text = " ";
 	}
+
+    private void HideText()
+    {
+        if (gameOverUsernameTextField != null && gameOverUsernameTextField.text != "")
+            gameOverUsernameTextField.text = " ";
+        if (gameOverScoreTextField != null && gameOverScoreTextField.text != "")
+            gameOverScoreTextField.text = " ";
+    }
 	
 	private void MoveAndStopStopAtPosition(GameObject go, Vector3 expectedPosition)
 	{
@@ -73,10 +78,11 @@ public class GamePlayMenusController : MonoBehaviour {
 			StopGame();
 			MoveAndStopStopAtPosition(scPauseMenuGO,V3_CENTER);
 			break;
-		case AppCore.Status.MENU:           
+		case AppCore.Status.MENU:
 			MoveAndStopStopAtPosition(scPauseMenuGO,V3_LEFT);
             MoveAndStopStopAtPosition(scFastGameOverMenuGO, V3_MENU_HIDEN);
             MoveAndStopStopAtPosition(scFastGameOverTextGO, V3_TEXT_HIDEN);
+            HideText();
             if (scPauseMenuGO.transform.position.x <= -12 && scFastGameOverMenuGO.transform.position.x >=12)
 			{
 				ResumeGame();
@@ -94,11 +100,11 @@ public class GamePlayMenusController : MonoBehaviour {
                 AppCore.BackToMenu();
             }
             break;
-		case AppCore.Status.RESTART_FAST_GAME:            
+		case AppCore.Status.RESTART_FAST_GAME:
+            HideText();
 			MoveAndStopStopAtPosition(scPauseMenuGO,V3_LEFT);
             MoveAndStopStopAtPosition(scFastGameOverMenuGO, V3_MENU_HIDEN);
             MoveAndStopStopAtPosition(scFastGameOverTextGO, V3_TEXT_HIDEN);
-
 			if(scPauseMenuGO.transform.position.x <= -12 && scFastGameOverMenuGO.transform.position.x >=12)
 			{
 				ResumeGame();
@@ -115,7 +121,8 @@ public class GamePlayMenusController : MonoBehaviour {
                 Application.LoadLevel(1);
             }
             break;
-        case AppCore.Status.FAST_GAME:            
+        case AppCore.Status.FAST_GAME:
+            HideText();
             if (GameCore.isShowStartCountDown)
             {
                 MoveAndStopStopAtPosition(scPauseMenuGO, V3_LEFT);
@@ -142,8 +149,11 @@ public class GamePlayMenusController : MonoBehaviour {
             if (isMenuTextAppeared)
             {
                 MoveAndStopStopAtPosition(scFastGameOverMenuGO, V3_CENTER);
-                gameOverUsernameTextField.(true);
-                gameOverScoreTextField.SetActive(true);
+                if (scFastGameOverMenuGO.rigidbody.velocity == Vector3.zero && scFastGameOverMenuGO.transform.position.x >= -0.2f && scFastGameOverMenuGO.transform.position.x<=0.2f)
+                {
+                    gameOverScoreTextField.text = "5000";
+                    gameOverUsernameTextField.text = "eldar";
+                }
             }
             break;
 		}
