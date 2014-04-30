@@ -75,7 +75,9 @@ public class PauseMenuButtonPressListener : MonoBehaviour
                 else if(AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL_PAUSE)
                     AppCore.CurrentStatus =AppCore.Status.ANY_LEVEL;
 			break;
-
+        case "Game Over Score Button":
+            AppCore.CurrentStatus = AppCore.Status.SCORES;
+            break;
 		case "Exit Pause Menu Button":
         case "Game Over Exit Button":
             if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME_PAUSE || AppCore.CurrentStatus == AppCore.Status.FAST_GAME_OVER)

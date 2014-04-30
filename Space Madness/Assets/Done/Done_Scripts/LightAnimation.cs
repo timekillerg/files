@@ -39,7 +39,6 @@ public class LightAnimation : MonoBehaviour {
 				light.intensity = Mathf.Lerp(light.intensity, 0.5f, smooth*10* Time.deltaTime);
 		}
 	}
-		
 	
 	void IntensityChanging ()
 	{
@@ -67,6 +66,12 @@ public class LightAnimation : MonoBehaviour {
 		case AppCore.Status.FAST_GAME:
 			ChangeBackground(gameLoadingFont);
 			break;
+        case AppCore.Status.SCORES:
+            ChangeBackground(gameLoadingFont);
+            break;
+        case AppCore.Status.MENU:
+            ChangeBackground(mainFont);
+            break;
         case AppCore.Status.ANY_LEVEL:
             break;
 		default:

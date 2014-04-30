@@ -52,7 +52,7 @@ public class MenuScript : MonoBehaviour {
 			case AppCore.Status.SCORES:
 				moveAndStopStopAtPosition(scScoresGO,V3_CENTER);
 				moveAndStopStopAtPosition(scMainMenuGO,V3_LEFT);
-				break;
+               	break;
 			case AppCore.Status.MAPS:
 				moveAndStopStopAtPosition(scMapsGO,V3_CENTER);
 				moveAndStopStopAtPosition(scMainMenuGO,V3_LEFT);

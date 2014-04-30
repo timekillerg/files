@@ -5,10 +5,11 @@ using AssemblyCSharp;
 public class KeyboardController : MonoBehaviour {
 
     private TouchScreenKeyboard keyboard = null;
+    public GUIText username;
 
 	void Start () 
     {
-        keyboard = new TouchScreenKeyboard("", TouchScreenKeyboardType.Default, true, true, false, false, "");
+        keyboard = new TouchScreenKeyboard("", TouchScreenKeyboardType.Default, true, true, false, false, DataCore.CurrentUsername);
         keyboard.active = false;
 	}
 
@@ -22,9 +23,22 @@ public class KeyboardController : MonoBehaviour {
             {
                 if (hit.collider.gameObject == gameObject)
                 {
-                    Debug.Log("Keyboard appeared");
-                   TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, true, false, false, false, "Enter your name");
+                    keyboard = TouchScreenKeyboard.Open(DataCore.CurrentUsername, TouchScreenKeyboardType.Default, true, false, false, false, "Enter your name");
                 }
+            }
+        }
+    }
+
+    void Update()
+    {
+        if (keyboard.active)
+            username.text = keyboard.text;
+        if (keyboard.done)
+        {
+            if (keyboard.text.Length > 0)
+            {
+                username.text = keyboard.text;
+                DataCore.CurrentUsername = username.text;
             }
         }
     }

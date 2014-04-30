@@ -50,7 +50,7 @@ namespace AssemblyCSharp
                 {
                     MonoBehaviour.Destroy(GameObject.Find("Screen First Loading"));                    
                 }
-                if (currentStatus != Status.LEVELS_METEOR && currentStatus != Status.LEVELS_SUN && currentStatus != Status.LEVELS_ICE && currentStatus != Status.LEVELS_DOWN)
+                if (currentStatus != Status.SCORES && currentStatus != Status.LEVELS_METEOR && currentStatus != Status.LEVELS_SUN && currentStatus != Status.LEVELS_ICE && currentStatus != Status.LEVELS_DOWN)
                     currentStatus = Status.MENU;
                 else
                 {

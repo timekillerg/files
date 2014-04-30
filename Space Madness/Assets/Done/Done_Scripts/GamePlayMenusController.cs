@@ -8,19 +8,17 @@ public class GamePlayMenusController : MonoBehaviour {
     public GameObject scFastGameOverTextGO;
     public GUIText gameOverUsernameTextField;
     public GUIText gameOverScoreTextField;
+    public GUIText scoreText;
 	private float speed;
 	private Vector3 V3_LEFT = new Vector3 (-14f, 0.0f, 6.0f);
 	private Vector3 V3_CENTER = new Vector3 (0.0f, 0.0f, 6.0f);
 	private Vector3 V3_DELTA = new Vector3 (0.2f, 0.2f, 0.2f);
 	private float timeScale = 0.0f;
-
     private Vector3 V3_TEXT_HIDEN = new Vector3(0f, 2f, 18f);
-    private Vector3 V3_TEXT_APPEAR = new Vector3(0f, 2f, 6f);
     private Vector3 V3_TEXT_UP = new Vector3(0f, 2f, 12.5f);
-    
-
     private Vector3 V3_MENU_HIDEN = new Vector3(14.0f, 0f, 6f);
-    private Vector3 V3_MENU_CENTER = new Vector3(0.0f, 0f, 6f);
+
+    private bool isScoreAlreadySaved = false;
 
     private bool isMenuTextAppeared = false;
 	
@@ -68,6 +66,16 @@ public class GamePlayMenusController : MonoBehaviour {
 			Time.timeScale = timeScale;
 		timeScale = 0.0f;
 	}
+
+    private void SaveScore()
+    {
+        if(gameOverScoreTextField.text != " ")
+            if (!isScoreAlreadySaved && int.Parse(gameOverScoreTextField.text) > 5 && gameOverUsernameTextField.text.Length > 0)
+            {
+                DataCore.SaveScore(gameOverUsernameTextField.text, int.Parse(gameOverScoreTextField.text));
+                isScoreAlreadySaved = true;
+            }
+    }
 	
 	void Update()
 	{
@@ -79,6 +87,7 @@ public class GamePlayMenusController : MonoBehaviour {
 			MoveAndStopStopAtPosition(scPauseMenuGO,V3_CENTER);
 			break;
 		case AppCore.Status.MENU:
+            SaveScore();
 			MoveAndStopStopAtPosition(scPauseMenuGO,V3_LEFT);
             MoveAndStopStopAtPosition(scFastGameOverMenuGO, V3_MENU_HIDEN);
             MoveAndStopStopAtPosition(scFastGameOverTextGO, V3_TEXT_HIDEN);
@@ -89,6 +98,17 @@ public class GamePlayMenusController : MonoBehaviour {
 				AppCore.BackToMenu();
 			}
 			break;
+        case AppCore.Status.SCORES:
+            SaveScore();
+            MoveAndStopStopAtPosition(scFastGameOverMenuGO, V3_MENU_HIDEN);
+            MoveAndStopStopAtPosition(scFastGameOverTextGO, V3_TEXT_HIDEN);
+            HideText();
+            if (scFastGameOverMenuGO.transform.position.x >= 12)
+            {
+                ResumeGame();
+                AppCore.BackToMenu();
+            }
+            break;
         case AppCore.Status.LEVELS_DOWN:
         case AppCore.Status.LEVELS_ICE:
         case AppCore.Status.LEVELS_METEOR:
@@ -101,6 +121,7 @@ public class GamePlayMenusController : MonoBehaviour {
             }
             break;
 		case AppCore.Status.RESTART_FAST_GAME:
+            SaveScore();
             HideText();
 			MoveAndStopStopAtPosition(scPauseMenuGO,V3_LEFT);
             MoveAndStopStopAtPosition(scFastGameOverMenuGO, V3_MENU_HIDEN);
@@ -151,8 +172,8 @@ public class GamePlayMenusController : MonoBehaviour {
                 MoveAndStopStopAtPosition(scFastGameOverMenuGO, V3_CENTER);
                 if (scFastGameOverMenuGO.rigidbody.velocity == Vector3.zero && scFastGameOverMenuGO.transform.position.x >= -0.2f && scFastGameOverMenuGO.transform.position.x<=0.2f)
                 {
-                    gameOverScoreTextField.text = "5000";
-                    gameOverUsernameTextField.text = "eldar";
+                    gameOverScoreTextField.text = scoreText.text.Replace("Score: ", "");
+                    gameOverUsernameTextField.text = DataCore.CurrentUsername;
                 }
             }
             break;
