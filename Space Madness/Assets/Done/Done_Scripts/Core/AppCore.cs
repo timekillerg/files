@@ -6,7 +6,7 @@ namespace AssemblyCSharp
 {
 	public class AppCore
 	{
-        public enum Status { LOADING, MENU, FAST_GAME, MAPS, LEVELS, SCORES, EXIT, LEVELS_METEOR, LEVELS_ICE, LEVELS_SUN, LEVELS_DOWN, FAST_GAME_PAUSE, RESTART_FAST_GAME, ANY_LEVEL, ANY_LEVEL_PAUSE, RESTART_ANY_LEVEL, FAST_GAME_OVER, ANY_LEVEL_LOSE, ANY_LEVEL_WIN };
+        public enum Status { LOADING, MENU, FAST_GAME, MAPS, LEVELS, SCORES, EXIT, LEVELS_METEOR, LEVELS_ICE, LEVELS_SUN, LEVELS_DOWN, FAST_GAME_PAUSE, RESTART_FAST_GAME, ANY_LEVEL, ANY_LEVEL_PAUSE, RESTART_ANY_LEVEL, FAST_GAME_OVER, ANY_LEVEL_COMPLETE, ANY_LEVEL_FAILED };
 		
 		private static bool isStart = true;
 		//Screens from Main Menu
@@ -28,16 +28,6 @@ namespace AssemblyCSharp
             get { return AppCore.currentStatus; }
             set { AppCore.currentStatus = value; }
         }
-        /*
-		public static void SetStatus(Status status)
-		{
-			currentStatus = status;
-		}
-
-		public static Status GetCurrentStatus()
-		{
-			return currentStatus;
-		}*/
 
 		public static void Start () {
 			if (isStart) 

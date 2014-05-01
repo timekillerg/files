@@ -7,12 +7,8 @@ public class MenuButtonPressListener : MonoBehaviour {
 	public Sprite pressedSprite;
 	private Sprite notPressedSprite;
 
-
 	void Start () {
 		notPressedSprite = ((SpriteRenderer)renderer).sprite;
-	}
-	
-	void Update () {
 	}
 	
 	void OnMouseDown()
@@ -52,7 +48,6 @@ public class MenuButtonPressListener : MonoBehaviour {
 		switch(tag) {
 		case "FastGameStartButton":
 			AppCore.CurrentStatus = AppCore.Status.FAST_GAME;	
-			//AppCore.Load();
 			break;
 		case "ExitGameButton":
             AppCore.CurrentStatus = AppCore.Status.EXIT;

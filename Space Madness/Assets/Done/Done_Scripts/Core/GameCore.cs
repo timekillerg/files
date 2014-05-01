@@ -14,7 +14,25 @@ namespace AssemblyCSharp
         private static GameParameters gameParameters;
 
         public static bool isShowStartCountDown = false;
-        public static float timeScale = 0.0f;
+        private static float timeScale = 0.0f;
+
+        public static void StopGame()
+        {
+            if(Time.timeScale !=0.0f)
+            {
+                timeScale = Time.timeScale;
+                Time.timeScale = 0.0f;
+            }
+        }
+
+        public static void ResumeGame()
+        {
+            if (Time.timeScale == 0.0f)
+            {
+                Time.timeScale = timeScale;
+                timeScale = 0.0f;
+            }
+        }
 
         public static GameParameters GameParameters
         {

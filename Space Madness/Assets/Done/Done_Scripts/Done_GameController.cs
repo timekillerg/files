@@ -5,6 +5,12 @@ using AssemblyCSharp;
 public class Done_GameController : MonoBehaviour
 {
 	public GameObject[] hazards;
+    public GameObject countdown;
+    public GameObject gameOverButtons;
+    public GameObject menuPauseButtons;
+    public GameObject levelCompleteButtons;
+    public GameObject levelFailedButtons;
+
 	public Vector3 spawnValues;
 	public int hazardCount;
 	public float spawnWait;
@@ -14,37 +20,45 @@ public class Done_GameController : MonoBehaviour
 	public GUIText scoreText;
 	
 	private bool gameOver;
-	private bool restart;
 	private int score;
 	
 	void Start ()
 	{
+        Instantiate(countdown);
 		gameOver = false;
-		restart = false;
 		score = 0;
 		UpdateScore ();
 		StartCoroutine (SpawnWaves ());
 	}
 	
 	void Update ()
-	{
-		if (restart)
-		{
-			if (Input.GetKeyDown (KeyCode.R))
-			{
-				Application.LoadLevel (Application.loadedLevel);
-			}
-		}
+	{		
 		if (Input.GetKeyDown(KeyCode.Escape))			
 		{
-			if(AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
-				AppCore.CurrentStatus = AppCore.Status.FAST_GAME_PAUSE;
+            if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
+            {
+                Instantiate(menuPauseButtons);
+                AppCore.CurrentStatus = AppCore.Status.FAST_GAME_PAUSE;
+            }
             else if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME_PAUSE)
-					AppCore.CurrentStatus = AppCore.Status.FAST_GAME;
-            else if (AppCore.CurrentStatus  == AppCore.Status.ANY_LEVEL)
+            {
+                AppCore.CurrentStatus = AppCore.Status.FAST_GAME;
+                Instantiate(countdown);
+            }
+            else if (AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL)
+            {
+                Instantiate(menuPauseButtons);
                 AppCore.CurrentStatus = AppCore.Status.ANY_LEVEL_PAUSE;
+            }
             else if (AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL_PAUSE)
+            {
                 AppCore.CurrentStatus = AppCore.Status.ANY_LEVEL;
+                Instantiate(countdown);
+            }
+            else if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME_OVER)
+            {
+                AppCore.CurrentStatus = AppCore.Status.MENU;
+            }
 		}
 	}
 	
@@ -68,7 +82,6 @@ public class Done_GameController : MonoBehaviour
 			
 			if (gameOver)
 			{				
-				restart = true;
 				break;
 			}
 		}
@@ -89,8 +102,14 @@ public class Done_GameController : MonoBehaviour
 	{        
         gameOver = true;
         if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
+        {
+            Instantiate(gameOverButtons);
             AppCore.CurrentStatus = AppCore.Status.FAST_GAME_OVER;
+        }
         else if (AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL)
-            AppCore.CurrentStatus = AppCore.Status.ANY_LEVEL_LOSE;
+        {
+            Instantiate(levelFailedButtons);
+            AppCore.CurrentStatus = AppCore.Status.ANY_LEVEL_FAILED;
+        }
 	}
 }
