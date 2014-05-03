@@ -62,9 +62,12 @@ public class MenuScript : MonoBehaviour {
 				moveAndStopStopAtPosition(scLevelsSunGO,V3_RIGHT);
 				moveAndStopStopAtPosition(levelInfo,V3_LEFT);
 				break;
-			case AppCore.Status.MENU:				
-				moveAndStopStopAtPosition(scMainMenuGO,V3_CENTER);
-				moveAndStopStopAtPosition(scScoresGO,V3_RIGHT);
+			case AppCore.Status.MENU:
+                if (GameObject.Find("ScoreRecordObject")==null)
+                {
+                    moveAndStopStopAtPosition(scMainMenuGO, V3_CENTER);
+                    moveAndStopStopAtPosition(scScoresGO, V3_RIGHT);
+                }
 				moveAndStopStopAtPosition(scMapsGO,V3_RIGHT);
 				moveAndStopStopAtPosition(scLevelsMeteorGO,V3_RIGHT);
 				moveAndStopStopAtPosition(scLevelsIceGO,V3_RIGHT);

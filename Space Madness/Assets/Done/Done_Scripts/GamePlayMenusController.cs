@@ -95,7 +95,7 @@ public class GamePlayMenusController : MonoBehaviour {
 			break;
 		case AppCore.Status.MENU:
             SaveScore();
-            HideText();            
+            HideText();
 			MoveAndStopStopAtPosition(scPauseMenuGO,V3_LEFT);
             MoveAndStopStopAtPosition(scFastGameOverMenuGO, V3_MENU_HIDEN);
             MoveAndStopStopAtPosition(scFastGameOverTextGO, V3_TEXT_HIDEN);
@@ -124,6 +124,7 @@ public class GamePlayMenusController : MonoBehaviour {
         case AppCore.Status.LEVELS_ICE:
         case AppCore.Status.LEVELS_METEOR:
         case AppCore.Status.LEVELS_SUN:
+            HideText();
             MoveAndStopStopAtPosition(scPauseMenuGO, V3_LEFT);   
             MoveAndStopStopAtPosition(scLevelCompleteMenuGO, V3_MENU_HIDEN);
             MoveAndStopStopAtPosition(scLevelFailedMenuGO, V3_MENU_HIDEN);
@@ -154,6 +155,7 @@ public class GamePlayMenusController : MonoBehaviour {
 			}
 			break;
         case AppCore.Status.RESTART_ANY_LEVEL:
+            HideText();
             MoveAndStopStopAtPosition(scPauseMenuGO, V3_LEFT);
             MoveAndStopStopAtPosition(scLevelCompleteMenuGO, V3_MENU_HIDEN);
             MoveAndStopStopAtPosition(scLevelFailedMenuGO, V3_MENU_HIDEN);
@@ -175,7 +177,8 @@ public class GamePlayMenusController : MonoBehaviour {
             if (scPauseMenuGO!= null && scPauseMenuGO.transform.position.x <= -12)
                 Destroy(scPauseMenuGO);
             break;
-        case AppCore.Status.ANY_LEVEL:            
+        case AppCore.Status.ANY_LEVEL:
+            HideText();
             MoveAndStopStopAtPosition(scPauseMenuGO, V3_LEFT);
             if (scPauseMenuGO!= null && scPauseMenuGO.transform.position.x <= -12)
                 Destroy(scPauseMenuGO);            

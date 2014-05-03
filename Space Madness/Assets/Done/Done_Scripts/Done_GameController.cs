@@ -5,6 +5,12 @@ using AssemblyCSharp;
 public class Done_GameController : MonoBehaviour
 {
 	public GameObject[] hazards;
+
+    public GameObject[] hazardsMeteor;
+    public GameObject[] hazardsIce;
+    public GameObject[] hazardsDownFall;
+    public GameObject[] hazardsSunStorm;
+
     public GameObject countdown;
     public GameObject gameOverButtons;
     public GameObject menuPauseButtons;
@@ -24,11 +30,14 @@ public class Done_GameController : MonoBehaviour
 	
 	void Start ()
 	{
+        if(AppCore.CurrentStatus!=AppCore.Status.FAST_GAME)
+            if (GameCore.mapType != null && GameCore.mapType == Maps.IceAnomaly)
+                hazards = hazardsIce;
         Instantiate(countdown);
 		gameOver = false;
 		score = 0;
 		UpdateScore ();
-		StartCoroutine (SpawnWaves ());
+		StartCoroutine (SpawnWaves ());       
 	}
 	
 	void Update ()
