@@ -11,26 +11,48 @@ public class LevelButtonPressListener : MonoBehaviour {
 	public GameObject star2;
 	public GameObject star3;
 
-	private bool isLevelAvailable;
-	private int countOfStars;
+	private bool isLevelAvailable = false;
+    private int countOfStars = 0;
+    private string levelName;
 		
 	void Start () {
-		countOfStars = 1;
-		isLevelAvailable = true;
+        levelName = gameObject.transform.parent.gameObject.name;
+        countOfStars = DataCore.GetLevelCountOfStars(levelName);
 
-		if (gameObject.transform.parent.gameObject.name.Contains ("11"))
-			countOfStars = 3;
-		if (gameObject.transform.parent.gameObject.name.Contains ("12"))
-		{
-			countOfStars = 0;
-			isLevelAvailable = false;
-		}
+        LoadStarsOnScreen(countOfStars);
 
-		LoadStarsOnScreen ();
+        if (countOfStars > 0)
+            isLevelAvailable = true;
+        Debug.Log(levelName+isLevelAvailable);
+        if ((countOfStars == 0) && (levelName == "Down Level 1" || levelName == "Sun Level 1" || levelName == "Ice Level 1" || levelName == "Meteor Level 1"))
+            isLevelAvailable = true;
+        Debug.Log(levelName + isLevelAvailable);
+        if ((countOfStars == 0) && !isLevelAvailable)
+            CheckIsPreviousLevelOpened();
+
+        Debug.Log(levelName + isLevelAvailable);
+
 		SetSprite (false);
 	}
 
-	private void LoadStarsOnScreen()
+    private void CheckIsPreviousLevelOpened()
+    {       
+        string[] levelNameBeginings = { "Down Level ", "Sun Level ", "Ice Level ", "Meteor Level " };
+
+        foreach(string levelNameBegin in levelNameBeginings)
+        {
+            if (levelName.Contains(levelNameBegin))
+            {
+                string temp = levelName;
+                int levelNumber = int.Parse(levelName.Replace(levelNameBegin, ""));
+                levelName = temp;
+                if(levelNumber>0 && DataCore.GetLevelCountOfStars(levelNameBegin+(levelNumber-1).ToString()) > 0)
+                    isLevelAvailable = true;
+            }
+        }
+    }
+
+    private void LoadStarsOnScreen(int countOfStars)
 	{
 		switch(countOfStars)
 		{
@@ -85,7 +107,7 @@ public class LevelButtonPressListener : MonoBehaviour {
 			if (Physics.Raycast (ray, out hit, 100)) {
 				if(hit.collider.gameObject == gameObject)
 				{
-					SetSprite(true);
+                    SetSprite(true);
 				}
 			}
 		}
@@ -98,7 +120,7 @@ public class LevelButtonPressListener : MonoBehaviour {
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			RaycastHit hit;				
 			if (Physics.Raycast (ray, out hit, 100)) {
-				if(hit.collider.gameObject == gameObject)
+                if (hit.collider.gameObject == gameObject && isLevelAvailable)
 				{						
 					LevelButtonClicked();
 				}

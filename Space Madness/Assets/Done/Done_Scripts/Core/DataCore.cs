@@ -8,6 +8,7 @@ namespace AssemblyCSharp
     public class DataCore
     {
         private static String[] separator = new string[] { "[separator]" };
+        private static string LEVEL_CODE = "!@#%%%^74380444hjhjgiwfg";
         private static int countOfScoreValues = 28;
         private static List<ScoreRecord> ScoreRecords;
 
@@ -31,6 +32,7 @@ namespace AssemblyCSharp
                 }
             }
         }
+
         public static int IsSoundOn
         {
             get
@@ -106,6 +108,29 @@ namespace AssemblyCSharp
                 });
             }
             return ScoreRecords;
+        }
+
+        public static int GetLevelCountOfStars(string levelName)
+        {
+            if (PlayerPrefs.HasKey(LEVEL_CODE + levelName))
+                return PlayerPrefs.GetInt(LEVEL_CODE + levelName);
+            else
+            {
+                PlayerPrefs.SetInt(LEVEL_CODE + levelName, 0);
+                PlayerPrefs.Save();
+                return 0;
+            }
+        }
+
+        public static void SetLevelCountOfStars(string levelName, int countOfStars)
+        {
+            if (PlayerPrefs.HasKey(LEVEL_CODE + levelName) && PlayerPrefs.GetInt(LEVEL_CODE + levelName) >= countOfStars)
+                return;
+            else
+            {
+                PlayerPrefs.SetInt(LEVEL_CODE + levelName, countOfStars);
+                PlayerPrefs.Save();
+            }
         }
     }
 
