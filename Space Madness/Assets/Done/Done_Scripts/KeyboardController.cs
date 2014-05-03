@@ -5,10 +5,11 @@ using AssemblyCSharp;
 public class KeyboardController : MonoBehaviour {
 
     private TouchScreenKeyboard keyboard = null;
-    public GUIText username;
+    private GUIText username;
 
 	void Start () 
     {
+        username = GameObject.FindWithTag("TextUsername").guiText;
         keyboard = new TouchScreenKeyboard("", TouchScreenKeyboardType.Default, true, true, false, false, DataCore.CurrentUsername);
         keyboard.active = false;
 	}

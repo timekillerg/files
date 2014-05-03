@@ -31,7 +31,7 @@ public class Done_GameController : MonoBehaviour
 	void Start ()
 	{
         if(AppCore.CurrentStatus!=AppCore.Status.FAST_GAME)
-            if (GameCore.mapType != null && GameCore.mapType == Maps.IceAnomaly)
+            if (GameCore.mapType == Maps.IceAnomaly)
                 hazards = hazardsIce;
         Instantiate(countdown);
 		gameOver = false;
