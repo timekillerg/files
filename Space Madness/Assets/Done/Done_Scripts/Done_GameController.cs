@@ -30,9 +30,16 @@ public class Done_GameController : MonoBehaviour
 	
 	void Start ()
 	{
+        hazards = hazardsMeteor;
         if(AppCore.CurrentStatus!=AppCore.Status.FAST_GAME)
             if (GameCore.mapType == Maps.IceAnomaly)
                 hazards = hazardsIce;
+            else if (GameCore.mapType == Maps.SunStorm)
+                hazards = hazardsSunStorm;
+            else if (GameCore.mapType == Maps.MeteorRain)
+                hazards = hazardsMeteor;
+            else
+                hazards = hazardsMeteor;        
         Instantiate(countdown);
 		gameOver = false;
 		score = 0;
@@ -104,7 +111,7 @@ public class Done_GameController : MonoBehaviour
 	
 	void UpdateScore ()
 	{
-		scoreText.text = "Score:  " + score;
+		scoreText.text = score.ToString();
 	}
 	
 	public void GameOver ()

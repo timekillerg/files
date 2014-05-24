@@ -21,7 +21,7 @@ public class MenuButtonPressListener : MonoBehaviour {
 			if (Physics.Raycast (ray, out hit, 100)) {
 				if(hit.collider.gameObject == gameObject)
 				{
-					((SpriteRenderer)renderer).sprite = pressedSprite;	
+					((SpriteRenderer)renderer).sprite = pressedSprite;
 				}
 			}
 		}
