@@ -16,6 +16,22 @@ namespace AssemblyCSharp
         public static bool isShowStartCountDown = false;
         private static float timeScale = 0.0f;
 
+        
+        private static int countForMultiplicator;
+        public static int CountForMultiplicator
+        {
+            get { return GameCore.countForMultiplicator; }
+            set { GameCore.countForMultiplicator = value; }
+        }
+
+        private static int multiplicator;
+
+        public static int Multiplicator
+        {
+            get { return GameCore.multiplicator; }
+            set { GameCore.multiplicator = value; }
+        }
+
         public static void StopGame()
         {
             if(Time.timeScale !=0.0f)

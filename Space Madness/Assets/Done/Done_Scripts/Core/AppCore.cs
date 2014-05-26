@@ -20,6 +20,7 @@ namespace AssemblyCSharp
 		private static GameObject goDownLevel;
 
         private static Vector3 V3_LEFT = new Vector3(-14f, 0.0f, 0.0f);
+        private static Vector3 V3_RIGHT = new Vector3(14f, 0.0f, 0.0f);
 
         private static Status currentStatus;
 
@@ -46,6 +47,17 @@ namespace AssemblyCSharp
                 {
                     GameObject.Find("Screen Main Menu").transform.position = V3_LEFT;
                     GameObject.Find("Screen Maps").transform.position = V3_LEFT;
+                }
+                switch (currentStatus)
+                {
+                    case Status.SCORES:
+                        GameObject.Find("Screen Main Menu").transform.position = V3_LEFT;
+                        GameObject.Find("Screen Maps").transform.position = V3_RIGHT;
+                        GameObject.Find("Screen Levels Meteor").transform.position = V3_RIGHT;
+                        GameObject.Find("Screen Levels Ice").transform.position = V3_RIGHT;
+                        GameObject.Find("Screen Levels Sun").transform.position = V3_RIGHT;
+                        GameObject.Find("Screen Levels Down").transform.position = V3_RIGHT;
+                        break;
                 }
 			}
 		}

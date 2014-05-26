@@ -4,7 +4,7 @@ using AssemblyCSharp;
 
 public class Done_GameController : MonoBehaviour
 {
-	public GameObject[] hazards;
+    public GameObject[] hazards;
 
     public GameObject[] hazardsMeteor;
     public GameObject[] hazardsIce;
@@ -17,21 +17,48 @@ public class Done_GameController : MonoBehaviour
     public GameObject levelCompleteButtons;
     public GameObject levelFailedButtons;
 
-	public Vector3 spawnValues;
-	public int hazardCount;
-	public float spawnWait;
-	public float startWait;
-	public float waveWait;
-	
-	public GUIText scoreText;
-	
-	private bool gameOver;
-	private int score;
-	
-	void Start ()
-	{
+    public Vector3 spawnValues;
+    public int hazardCount;
+    public float spawnWait;
+    public float startWait;
+    public float waveWait;
+
+    public GUIText scoreText;
+
+    public GUIText multiplicatorText;
+    public GameObject multiplicatorTextBorder;
+
+    private bool gameOver;
+    private int score;
+
+    private Vector3 V3_DELTA = new Vector3(0.1f, 0.1f, 0.1f);
+    private Vector3 V3_MULT_VISIBLE = new Vector3(-4.75f, 1.9f, 12.4f);
+    private Vector3 V3_MULT_HIDDEN = new Vector3(-8f, 1.9f, 12.4f);
+
+    private float speed = 5f;
+
+    private void MoveAndStopStopAtPosition(GameObject go, Vector3 expectedPosition)
+    {
+        if (go != null)
+        {
+            go.rigidbody.velocity = Vector3.zero;
+            go.rigidbody.transform.position = Vector3.Lerp(go.transform.position, expectedPosition, Time.fixedDeltaTime * speed);
+            if (go.rigidbody.position.x >= (expectedPosition.x - V3_DELTA.x) && go.rigidbody.position.x <= (expectedPosition.x + V3_DELTA.x))
+            {
+                if (go.rigidbody.velocity == Vector3.zero)
+                    return;
+                else
+                    go.rigidbody.velocity = Vector3.zero;
+            }
+        }
+    }
+
+    void Start()
+    {
+        GameCore.CountForMultiplicator = 0;
+        GameCore.Multiplicator = 1;
         hazards = hazardsMeteor;
-        if(AppCore.CurrentStatus!=AppCore.Status.FAST_GAME)
+        if (AppCore.CurrentStatus != AppCore.Status.FAST_GAME)
             if (GameCore.mapType == Maps.IceAnomaly)
                 hazards = hazardsIce;
             else if (GameCore.mapType == Maps.SunStorm)
@@ -39,18 +66,35 @@ public class Done_GameController : MonoBehaviour
             else if (GameCore.mapType == Maps.MeteorRain)
                 hazards = hazardsMeteor;
             else
-                hazards = hazardsMeteor;        
+                hazards = hazardsMeteor;
         Instantiate(countdown);
-		gameOver = false;
-		score = 0;
-		UpdateScore ();
-		StartCoroutine (SpawnWaves ());       
-	}
-	
-	void Update ()
-	{		
-		if (Input.GetKeyDown(KeyCode.Escape))			
-		{
+        gameOver = false;
+        score = 0;
+        UpdateScore();
+        StartCoroutine(SpawnWaves());
+    }
+
+    void ShowMultiplicatorIcon()
+    {
+        if (GameCore.Multiplicator > 1 && (AppCore.CurrentStatus == AppCore.Status.FAST_GAME || AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL || AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL_PAUSE || AppCore.CurrentStatus == AppCore.Status.FAST_GAME_PAUSE))
+        {
+            MoveAndStopStopAtPosition(multiplicatorTextBorder, V3_MULT_VISIBLE);
+            if (multiplicatorTextBorder.transform.position.x > -5)
+                multiplicatorText.text = "X " + GameCore.Multiplicator.ToString();
+        }
+        else
+        {
+            if (multiplicatorText.text != " ")
+                multiplicatorText.text = " ";
+            MoveAndStopStopAtPosition(multiplicatorTextBorder, V3_MULT_HIDDEN);
+        }
+    }
+
+    void Update()
+    {
+        ShowMultiplicatorIcon();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
             if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
             {
                 Instantiate(menuPauseButtons);
@@ -75,47 +119,47 @@ public class Done_GameController : MonoBehaviour
             {
                 AppCore.CurrentStatus = AppCore.Status.MENU;
             }
-		}
-	}
-	
-	IEnumerator SpawnWaves ()
-	{
-		yield return new WaitForSeconds (startWait);
-        while (true)
-		{
-			for (int i = 0; i < hazardCount; i++)
-			{
-				GameObject hazard = hazards [Random.Range (0, hazards.Length)];
-				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
-				Quaternion spawnRotation = Quaternion.identity;
-                
-                if(AppCore.CurrentStatus == AppCore.Status.FAST_GAME || AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL)
-				    Instantiate (hazard, spawnPosition, spawnRotation);
+        }
+    }
 
-				yield return new WaitForSeconds (spawnWait);
-			}
-			yield return new WaitForSeconds (waveWait);
-			
-			if (gameOver)
-			{				
-				break;
-			}
-		}
-	}
-	
-	public void AddScore (int newScoreValue)
-	{
-		score += newScoreValue;
-		UpdateScore ();
-	}
-	
-	void UpdateScore ()
-	{
-		scoreText.text = score.ToString();
-	}
-	
-	public void GameOver ()
-	{        
+    IEnumerator SpawnWaves()
+    {
+        yield return new WaitForSeconds(startWait);
+        while (true)
+        {
+            for (int i = 0; i < hazardCount; i++)
+            {
+                GameObject hazard = hazards[Random.Range(0, hazards.Length)];
+                Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+                Quaternion spawnRotation = Quaternion.identity;
+
+                if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME || AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL)
+                    Instantiate(hazard, spawnPosition, spawnRotation);
+
+                yield return new WaitForSeconds(spawnWait);
+            }
+            yield return new WaitForSeconds(waveWait);
+
+            if (gameOver)
+            {
+                break;
+            }
+        }
+    }
+
+    public void AddScore(int newScoreValue)
+    {
+        score += newScoreValue * GameCore.Multiplicator;
+        UpdateScore();
+    }
+
+    void UpdateScore()
+    {
+        scoreText.text = score.ToString();
+    }
+
+    public void GameOver()
+    {
         gameOver = true;
         if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
         {
@@ -127,5 +171,5 @@ public class Done_GameController : MonoBehaviour
             Instantiate(levelFailedButtons);
             AppCore.CurrentStatus = AppCore.Status.ANY_LEVEL_FAILED;
         }
-	}
+    }
 }
