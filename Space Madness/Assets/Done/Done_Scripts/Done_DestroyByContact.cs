@@ -10,6 +10,9 @@ public class Done_DestroyByContact : MonoBehaviour
     public int scoreValue;
     private Done_GameController gameController;
 
+    public GameObject bonusEffectAppear;
+    public GameObject bonus;
+
     void Start()
     {
         GameObject gameControllerObject = GameObject.FindGameObjectWithTag("GameController");
@@ -33,6 +36,13 @@ public class Done_DestroyByContact : MonoBehaviour
         if (explosion != null)
         {
             Instantiate(explosion, transform.position, transform.rotation);
+
+            if (this.name.StartsWith("Done_Enemy Ship"))
+            {
+                Instantiate(bonusEffectAppear, transform.position, transform.rotation);
+                Instantiate(bonus, transform.position, Quaternion.identity);
+                bonus.rigidbody.velocity = rigidbody.velocity;
+            }
         }
 
         if (other.tag == "Player")
@@ -42,10 +52,10 @@ public class Done_DestroyByContact : MonoBehaviour
         }
 
         if (this.name.StartsWith("Done_Enemy Ship"))
-        {           
+        {
             GameCore.CountForMultiplicator++;
-            if (GameCore.CountForMultiplicator % 3==0)
-                GameCore.Multiplicator = 1+ GameCore.CountForMultiplicator / 3;
+            if (GameCore.CountForMultiplicator % 3 == 0)
+                GameCore.Multiplicator = 1 + GameCore.CountForMultiplicator / 3;
         }
 
 
