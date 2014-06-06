@@ -14,6 +14,8 @@ public class GamePlayMenusController : MonoBehaviour {
 
     public GUIText gameOverUsernameTextField;
     public GUIText gameOverScoreTextField;
+    public GUIText levelOverScoreTextField;
+
     public GUIText scoreText;
 	private float speed;
 	private Vector3 V3_LEFT = new Vector3 (-14f, 0.0f, 6.0f);
@@ -31,6 +33,7 @@ public class GamePlayMenusController : MonoBehaviour {
 		speed = 3f;
         gameOverUsernameTextField.text = " ";
         gameOverScoreTextField.text = " ";
+        levelOverScoreTextField.text = " ";
 	}
 
     private void HideText()
@@ -39,6 +42,8 @@ public class GamePlayMenusController : MonoBehaviour {
             gameOverUsernameTextField.text = " ";
         if (gameOverScoreTextField != null && gameOverScoreTextField.text != "")
             gameOverScoreTextField.text = " ";
+        if (levelOverScoreTextField != null && levelOverScoreTextField.text != "")
+            levelOverScoreTextField.text = " ";
     }
 	
 	private void MoveAndStopStopAtPosition(GameObject go, Vector3 expectedPosition)
@@ -206,7 +211,7 @@ public class GamePlayMenusController : MonoBehaviour {
                 MoveAndStopStopAtPosition(scLevelCompleteMenuGO, V3_CENTER);
                 if (scLevelCompleteMenuGO.rigidbody.velocity == Vector3.zero && scLevelCompleteMenuGO.transform.position.x >= -0.2f && scLevelCompleteMenuGO.transform.position.x <= 0.2f)
                 {
-                    gameOverScoreTextField.text = scoreText.text.Replace("Score: ", "");
+                    levelOverScoreTextField.text = scoreText.text.Replace("Score: ", "");
                 }
             }
             break;
@@ -219,7 +224,7 @@ public class GamePlayMenusController : MonoBehaviour {
                 MoveAndStopStopAtPosition(scLevelFailedMenuGO, V3_CENTER);
                 if (scLevelFailedMenuGO.rigidbody.velocity == Vector3.zero && scLevelFailedMenuGO.transform.position.x >= -0.2f && scLevelFailedMenuGO.transform.position.x <= 0.2f)
                 {
-                    gameOverScoreTextField.text = scoreText.text.Replace("Score: ", "");
+                    levelOverScoreTextField.text = scoreText.text.Replace("Score: ", "");
                 }
             }
             break;

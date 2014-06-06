@@ -4,6 +4,7 @@ using AssemblyCSharp;
 
 public class ScoreScreenController : MonoBehaviour {
     public GameObject text;
+    public GameObject text_devider;
     private bool isScoreLoaded = false;
     	
 	void Update () {
@@ -35,10 +36,10 @@ public class ScoreScreenController : MonoBehaviour {
                         scoreValueObject.guiText.text = DataCore.GetScores()[i - 1].Score.ToString();
 
                         GameObject lineObject;
-                        lineObject = Instantiate(text) as GameObject;
+                        lineObject = Instantiate(text_devider) as GameObject;
                         lineObject.name = "ScoreRecordObject";
-                        lineObject.transform.position = new Vector3(0.0f, 0.9f - (DataCore.GetScores().Count - i) * 0.03f, 0);
-                        lineObject.guiText.text = "_____________________________________________________________________";
+                        lineObject.transform.position = new Vector3(0.0f, 0.89f - (DataCore.GetScores().Count - i) * 0.03f, 0);
+                        lineObject.guiText.text = "_______________________________________________________________________________________________";
                     }
                 }
             }
