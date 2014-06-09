@@ -10,8 +10,7 @@ public class Done_DestroyByContact : MonoBehaviour
     public int scoreValue;
     private Done_GameController gameController;
 
-    public GameObject bonusEffectAppear;
-    public GameObject bonus;
+    public GameObject[] bonuses;
 
     void Start()
     {
@@ -39,9 +38,11 @@ public class Done_DestroyByContact : MonoBehaviour
 
             if (this.name.StartsWith("Done_Enemy Ship"))
             {
-                Instantiate(bonusEffectAppear, transform.position, transform.rotation);
-                Instantiate(bonus, transform.position, Quaternion.identity);
-                bonus.rigidbody.velocity = rigidbody.velocity;
+                if (UnityEngine.Random.Range(0,3)==0)
+                {
+                    int bonus_id = UnityEngine.Random.Range(0, bonuses.Length);
+                    UnityEngine.Object bonus = Instantiate(bonuses[bonus_id], transform.position, Quaternion.identity);
+                }
             }
         }
 
