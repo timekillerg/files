@@ -4,13 +4,15 @@ using AssemblyCSharp;
 
 public class Done_Mover : MonoBehaviour
 {
-	public float speed;
+    public float speed;
 
-	void Start ()
-	{
-      if (AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL)
-           rigidbody.velocity = transform.forward * speed * GameCore.GameParameters.Acceleration;
-      if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
-          rigidbody.velocity = transform.forward * speed;
+    void Start()
+    {
+        if (AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL)
+            rigidbody.velocity = transform.forward * speed * GameCore.GameParameters.Acceleration;
+        else if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
+            rigidbody.velocity = transform.forward * speed;
+        else if (gameObject.tag == "Bonus")
+            rigidbody.velocity = transform.forward * speed;
     }
 }
