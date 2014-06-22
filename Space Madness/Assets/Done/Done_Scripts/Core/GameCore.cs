@@ -5,9 +5,13 @@ using System.Text;
 namespace AssemblyCSharp
 {
     public enum Maps { MeteorRain, IceAnomaly, DownFall, SunStorm, Unknown }
+    public enum WeaponType { Default, Rocket, Laser, Plasma, Acid }
 
 	public static class GameCore
 	{
+        public static WeaponType CurrentWeaponType;
+        public static float WeaponStartTime;
+
         public static Maps mapType;
         public static String levelName;
 
@@ -285,5 +289,13 @@ namespace AssemblyCSharp
             countEnemiesToDestroy = 0;
             surviveTime = 0;
         }
+    }
+
+    [System.Serializable]
+    public class Weapon
+    {
+        public string Name;
+        public GameObject Bolt;
+        public float PeriodBetweenShots;
     }
 }

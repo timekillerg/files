@@ -10,7 +10,7 @@ var detachOnDeath:GameObject[];
 
 function Start () {
 if (muzzleFire) Instantiate(muzzleFire, transform.position, transform.rotation);
-rigidbody.AddForce(transform.up * impulseForce, ForceMode.Impulse);
+rigidbody.AddForce(transform.forward  * impulseForce, ForceMode.Impulse);
 
 }
 

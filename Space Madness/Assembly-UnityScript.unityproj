@@ -46,32 +46,32 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_AddForceContinuous.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_AddForceImpulse.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_AddRandomForceImpulse.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_AddRandomForceTorque.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_AsteroidController.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_BulletController.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_Detach.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_LaserController.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_LaserEffect.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_Pickupable.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_Sound.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_UVScrollerExtended.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_continuousPrefabGenerator.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_destroyThisTimed.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_effectCaster.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_fragmentController.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_matAlphaInOut.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_moveThis.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_prefabCloner.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_prefabGenerator.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_randoMMoveInBox1.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_rotateThis.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_shieldedController.js" />
-     <Compile Include="Assets\ScifiEffects\Scripts\SFE_spaceshipScript.js" />
-     <None Include="Assets\ScifiEffects\Shaders\SFE_TransparentAntiRim.shader" />
-     <None Include="Assets\ScifiEffects\Shaders\SFE_TransparentRim.shader" />
+     <Compile Include="Assets\Effects\Scripts\SFE_AddForceContinuous.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_AddForceImpulse.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_AddRandomForceImpulse.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_AddRandomForceTorque.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_AsteroidController.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_BulletController.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_Detach.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_LaserController.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_LaserEffect.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_Pickupable.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_Sound.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_UVScrollerExtended.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_continuousPrefabGenerator.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_destroyThisTimed.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_effectCaster.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_fragmentController.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_matAlphaInOut.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_moveThis.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_prefabCloner.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_prefabGenerator.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_randoMMoveInBox1.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_rotateThis.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_shieldedController.js" />
+     <Compile Include="Assets\Effects\Scripts\SFE_spaceshipScript.js" />
+     <None Include="Assets\Effects\Shaders\SFE_TransparentAntiRim.shader" />
+     <None Include="Assets\Effects\Shaders\SFE_TransparentRim.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

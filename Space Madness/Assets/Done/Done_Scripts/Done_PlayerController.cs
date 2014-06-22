@@ -8,66 +8,13 @@ public class Done_Boundary
 	public float xMin, xMax, zMin, zMax;
 }
 
-[System.Serializable]
-public class Weapon
-{
-    public string Name;
-    public GameObject bolt;   
-    public Transform shotSpawn;
-    public float boltSpeed;
-    public float timeBetweenShots;
-    public float lifeTime;
-}
-
 public class Done_PlayerController : MonoBehaviour
 {
 	public float speed;
 	public float tilt;
 	public Done_Boundary boundary;
 
-	public GameObject shot;
-	public Transform shotSpawn;
-	public float fireRate;	 
-	private float nextFire;
-
-    public Weapon[] Weapons;
-    public Weapon CurrentWeapon;
-    public float BonusPickUpTime;
-    
-    public void SetBonusWeapon(string weaponName)
-    {
-        foreach (Weapon w in Weapons)
-            if (w.Name == weaponName)
-            {
-                CurrentWeapon = w;
-                BonusPickUpTime = Time.time;
-                break;
-            }
-    }
-
-    public void InstantiateWeaponBolt()
-    {
-        if (CurrentWeapon != null && CurrentWeapon.timeBetweenShots > (Time.time - BonusPickUpTime) && ((Time.time - BonusPickUpTime) > CurrentWeapon.lifeTime))
-        {
-            nextFire = Time.time + CurrentWeapon.timeBetweenShots;
-            Instantiate(CurrentWeapon.bolt, shotSpawn.position, shotSpawn.rotation);
-            audio.Play();
-        }
-    }
-
-    
-    void Start()
-    {
-        nextFire = Time.time + 0.5f;
-    }
-	
-	void Update ()
-	{
-        if (Time.time > nextFire && !GameCore.isShowStartCountDown) 
-		{
-            InstantiateWeaponBolt();
-		}
-	}
+  
 
 	void FixedUpdate()
 	{
