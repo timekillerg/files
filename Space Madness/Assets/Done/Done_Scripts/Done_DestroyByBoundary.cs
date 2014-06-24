@@ -11,7 +11,7 @@ public class Done_DestroyByBoundary : MonoBehaviour
             if (other.name.StartsWith("Done_Enemy Ship"))
             {               
                 GameCore.CountForMultiplicator = 0;
-                GameCore.Multiplicator = 0;
+                GameCore.Multiplicator = 1;
             }
             Destroy(other.gameObject);
         }

@@ -14,26 +14,24 @@ rigidbody.AddForce(transform.forward  * impulseForce, ForceMode.Impulse);
 
 }
 
-function Update () {
+////function Update () {
+////}
 
-}
+////function OnCollisionEnter(collision : Collision) {
+////Instantiate(explosion, transform.position, transform.rotation);
 
-function OnCollisionEnter(collision : Collision) {
-
-Instantiate(explosion, transform.position, transform.rotation);
-
-if (detachOnDeath) {
-	for(var i=0;i < detachOnDeath.length; i++)
-	{
-	detachOnDeath[i].transform.parent=null;
-	var PS : ParticleSystem;  
-	PS = detachOnDeath[i].GetComponent(ParticleSystem);
-	PS.enableEmission=false;
-	Destroy(detachOnDeath[i], 5);
-	}
-}
+////if (detachOnDeath) {
+////	for(var i=0;i < detachOnDeath.length; i++)
+////	{
+////	detachOnDeath[i].transform.parent=null;
+////	var PS : ParticleSystem;  
+////	PS = detachOnDeath[i].GetComponent(ParticleSystem);
+////	PS.enableEmission=false;
+////	Destroy(detachOnDeath[i], 5);
+////	}
+////}
 
 
-Destroy (gameObject);
+//Destroy (gameObject);
 
-}
+//}

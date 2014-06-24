@@ -15,7 +15,7 @@ public class WeaponController : MonoBehaviour
     void Start()
     {
         GameCore.WeaponStartTime = 0;
-        CurrentWeapon = weapons[0];
+        CurrentWeapon = weapons[0];// was 0
         GameCore.CurrentWeaponType = WeaponType.Default;
         NextFireTime = Time.time + CurrentWeapon.PeriodBetweenShots;
     }

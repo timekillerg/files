@@ -10,6 +10,8 @@ public class Done_DestroyByContact : MonoBehaviour
     public int scoreValue;
     private Done_GameController gameController;
 
+    public int howOftenBonusesDropping;
+
     public GameObject[] bonuses;
 
     void Start()
@@ -38,7 +40,7 @@ public class Done_DestroyByContact : MonoBehaviour
 
             if (this.name.StartsWith("Done_Enemy Ship"))
             {
-                if (UnityEngine.Random.Range(0,3)==0)
+                if (UnityEngine.Random.Range(0,2)==0)
                 {
                     int bonus_id = UnityEngine.Random.Range(0, bonuses.Length);
                     UnityEngine.Object bonus = Instantiate(bonuses[bonus_id], transform.position, Quaternion.identity);
