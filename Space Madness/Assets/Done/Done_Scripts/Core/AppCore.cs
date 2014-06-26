@@ -30,6 +30,11 @@ namespace AssemblyCSharp
             set { AppCore.currentStatus = value; }
         }
 
+        public static bool IsSlowMotion { get; set; }
+        public static bool IsFastMotion { get; set; }
+        public static bool IsGodMod { get; set; }
+
+
 		public static void Start () {
 			if (isStart) 
 			{

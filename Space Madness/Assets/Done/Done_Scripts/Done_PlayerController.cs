@@ -14,11 +14,18 @@ public class Done_PlayerController : MonoBehaviour
     public float tilt;
     public Done_Boundary boundary;
 
+    public bool enableTouchPlayerControl;
+    public bool enableMousePlayerControl;
+    public bool enableKeyboardPlayerControl;
+    
     void FixedUpdate()
     {
-        LoadTouchEvents();
-       // LoadMouseEvents();
-       // MovePlayerFromKeyboard();
+        if(enableTouchPlayerControl)
+            LoadTouchEvents();
+        if(enableMousePlayerControl)
+            LoadMouseEvents();
+        if(enableKeyboardPlayerControl)
+            MovePlayerFromKeyboard();
     }
 
     void LoadTouchEvents()

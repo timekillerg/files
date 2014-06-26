@@ -41,6 +41,17 @@ public class BonusPickUpHelper : MonoBehaviour
                 GameCore.CurrentWeaponType = WeaponType.Acid;
                 GameCore.WeaponStartTime = Time.time;
                 break;
+            case "BonusOther_Guard(Clone)":
+                AppCore.IsGodMod = true;
+                break;
+            case "BonusOther_Slow(Clone)":
+                AppCore.IsSlowMotion = true;
+                AppCore.IsFastMotion = false;
+                break;
+            case "BonusOther_Speed(Clone)":
+                AppCore.IsSlowMotion = false;
+                AppCore.IsFastMotion = true;
+                break;
         }
     }
 }
