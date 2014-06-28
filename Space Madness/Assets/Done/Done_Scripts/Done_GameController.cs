@@ -72,6 +72,9 @@ public class Done_GameController : MonoBehaviour
         score = 0;
         UpdateScore();
         StartCoroutine(SpawnWaves());
+        AppCore.IsFastMotion = false;
+        AppCore.IsGodMod = false;
+        AppCore.IsSlowMotion = false;
     }
 
     void ShowMultiplicatorIcon()

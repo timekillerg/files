@@ -40,7 +40,7 @@ public class Done_DestroyByContact : MonoBehaviour
 
             if (this.name.StartsWith("Done_Enemy Ship"))
             {
-                if (UnityEngine.Random.Range(0,2)==0)
+                if (UnityEngine.Random.Range(0, 2) == 0)
                 {
                     int bonus_id = UnityEngine.Random.Range(0, bonuses.Length);
                     UnityEngine.Object bonus = Instantiate(bonuses[bonus_id], transform.position, Quaternion.identity);
@@ -48,7 +48,7 @@ public class Done_DestroyByContact : MonoBehaviour
             }
         }
 
-        if (other.tag == "Player")
+        if (other.tag == "Player" && !AppCore.IsGodMod)
         {
             Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
             gameController.GameOver();
@@ -63,7 +63,10 @@ public class Done_DestroyByContact : MonoBehaviour
 
 
         gameController.AddScore(scoreValue);
-        Destroy(other.gameObject);
+
+        if (other.gameObject.tag != "shield")
+            Destroy(other.gameObject);
+
         Destroy(gameObject);
     }
 }

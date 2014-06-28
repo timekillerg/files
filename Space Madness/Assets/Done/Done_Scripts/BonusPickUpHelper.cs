@@ -5,19 +5,17 @@ using AssemblyCSharp;
 public class BonusPickUpHelper : MonoBehaviour
 {
     public GameObject bonusPiskUpEffect;
+    public GameObject bonusIcon;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player" && bonusPiskUpEffect != null)
         {
             Vector3 position = other.transform.position;
-            position.y = position.y + 0;
             Transform child = Instantiate(bonusPiskUpEffect, position, Quaternion.identity) as Transform;
 
-            Debug.Log(gameObject.name);
             SetCurrentWeapon();
             Destroy(gameObject);
-
         }
     }
 

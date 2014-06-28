@@ -86,6 +86,7 @@
      <Compile Include="Assets\Done\Done_Scripts\MoverHelper\RotatorYaxis.cs" />
      <Compile Include="Assets\Done\Done_Scripts\PlayIfAtscreen.cs" />
      <Compile Include="Assets\Done\Done_Scripts\ScoreScreenController.cs" />
+     <Compile Include="Assets\Done\Done_Scripts\ShowAndHideBonusIcon.cs" />
      <Compile Include="Assets\Done\Done_Scripts\TouchMoveButtons.cs" />
      <Compile Include="Assets\Done\Done_Scripts\WeaponController.cs" />
      <None Include="Assets\Effects\Shaders\SFE_TransparentAntiRim.shader" />

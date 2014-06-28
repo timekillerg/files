@@ -17,7 +17,7 @@ public class Done_PlayerController : MonoBehaviour
     public bool enableTouchPlayerControl;
     public bool enableMousePlayerControl;
     public bool enableKeyboardPlayerControl;
-    
+
     void FixedUpdate()
     {
         if(enableTouchPlayerControl)

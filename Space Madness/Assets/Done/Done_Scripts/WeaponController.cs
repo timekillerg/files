@@ -62,7 +62,7 @@ public class WeaponController : MonoBehaviour
 
     public void Shoot()
     {
-        NextFireTime = Time.time + CurrentWeapon.PeriodBetweenShots;
+        NextFireTime = Time.time + CurrentWeapon.PeriodBetweenShots * (AppCore.IsFastMotion ? 0.5f : 1f); ;
         Instantiate(CurrentWeapon.Bolt, shotSpawn.position, shotSpawn.rotation);
         audio.Play();
     }
