@@ -26,7 +26,7 @@ class ShowAndHideBonusIcon : MonoBehaviour
             || (gameObject.tag == "GuardIcon" && AppCore.IsGodMod)
             || (gameObject.tag == "HazardIcon" && GameCore.CurrentWeaponType == WeaponType.Acid)
             || (gameObject.tag == "PlasmaIcon" && GameCore.CurrentWeaponType == WeaponType.Plasma)
-            || (gameObject.tag == "LazerIcon" && GameCore.CurrentWeaponType == WeaponType.Laser)
+            || (gameObject.tag == "LaserIcon" && GameCore.CurrentWeaponType == WeaponType.Laser)
             || (gameObject.tag == "RocketIcon" && GameCore.CurrentWeaponType == WeaponType.Rocket)
             )
 

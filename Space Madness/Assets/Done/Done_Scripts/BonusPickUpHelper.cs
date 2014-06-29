@@ -14,6 +14,8 @@ public class BonusPickUpHelper : MonoBehaviour
             Vector3 position = other.transform.position;
             Transform child = Instantiate(bonusPiskUpEffect, position, Quaternion.identity) as Transform;
 
+            Instantiate(bonusIcon, new Vector3(-10,-10,-10), Quaternion.identity);
+
             SetCurrentWeapon();
             Destroy(gameObject);
         }
