@@ -20,7 +20,8 @@ namespace AssemblyCSharp
         public static bool isShowStartCountDown = false;
         private static float timeScale = 0.0f;
 
-        
+        public static int Score { get; set; }
+
         private static int countForMultiplicator;
         public static int CountForMultiplicator
         {

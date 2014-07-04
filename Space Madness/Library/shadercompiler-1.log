@@ -1,5 +1,5 @@
-Base path: C:/Program Files (x86)/Unity/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-1-9012
+Base path: H:/Program files/Unity/Editor/Data
+Pipe name: \\.\pipe\UnityShaderCompiler-1-3540
 Cmd: getPlatforms
 Cmd: preprocess
   insize=971 outsize=1152 ok=1
@@ -8,6 +8,36 @@ Cmd: preprocess
 Cmd: preprocess
   insize=1216 outsize=1166 ok=1
 Cmd: compileSnippet
-  api=1 type=0 insize=2509 outsize=279 kw=DIRECTIONAL ok=1
+  api=9 type=0 insize=4543 outsize=3069 kw=DIRECTIONAL LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1
 Cmd: compileSnippet
-  api=1 type=1 insize=2509 outsize=256 kw=DIRECTIONAL ok=1
+  api=9 type=0 insize=4543 outsize=1802 kw=DIRECTIONAL LIGHTMAP_ON DIRLIGHTMAP_OFF ok=1
+Cmd: compileSnippet
+  api=9 type=0 insize=4543 outsize=1802 kw=DIRECTIONAL LIGHTMAP_ON DIRLIGHTMAP_ON ok=1
+Cmd: compileSnippet
+  api=9 type=0 insize=4543 outsize=4155 kw=DIRECTIONAL LIGHTMAP_OFF DIRLIGHTMAP_OFF VERTEXLIGHT_ON ok=1
+Cmd: compileSnippet
+  api=5 type=1 insize=4543 outsize=6 kw=DIRECTIONAL LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1
+Cmd: compileSnippet
+  api=5 type=1 insize=4543 outsize=6 kw=DIRECTIONAL LIGHTMAP_ON DIRLIGHTMAP_OFF ok=1
+Cmd: compileSnippet
+  api=5 type=1 insize=4543 outsize=6 kw=DIRECTIONAL LIGHTMAP_ON DIRLIGHTMAP_ON ok=1
+Cmd: compileSnippet
+  api=5 type=0 insize=2509 outsize=1739 kw=POINT ok=1
+Cmd: compileSnippet
+  api=5 type=0 insize=2509 outsize=1561 kw=DIRECTIONAL ok=1
+Cmd: compileSnippet
+  api=5 type=0 insize=2509 outsize=1735 kw=SPOT ok=1
+Cmd: compileSnippet
+  api=5 type=0 insize=2509 outsize=1739 kw=POINT_COOKIE ok=1
+Cmd: compileSnippet
+  api=5 type=0 insize=2509 outsize=1699 kw=DIRECTIONAL_COOKIE ok=1
+Cmd: compileSnippet
+  api=5 type=1 insize=2509 outsize=6 kw=POINT ok=1
+Cmd: compileSnippet
+  api=5 type=1 insize=2509 outsize=6 kw=DIRECTIONAL ok=1
+Cmd: compileSnippet
+  api=5 type=1 insize=2509 outsize=6 kw=SPOT ok=1
+Cmd: compileSnippet
+  api=5 type=1 insize=2509 outsize=6 kw=POINT_COOKIE ok=1
+Cmd: compileSnippet
+  api=5 type=1 insize=2509 outsize=6 kw=DIRECTIONAL_COOKIE ok=1

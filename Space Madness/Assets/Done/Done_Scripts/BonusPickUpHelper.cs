@@ -9,7 +9,7 @@ public class BonusPickUpHelper : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && bonusPiskUpEffect != null)
+        if (other.CompareTag("Player") && bonusPiskUpEffect != null)
         {
             Vector3 position = other.transform.position;
             Transform child = Instantiate(bonusPiskUpEffect, position, Quaternion.identity) as Transform;
