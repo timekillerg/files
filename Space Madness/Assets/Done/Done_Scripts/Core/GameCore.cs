@@ -22,6 +22,8 @@ namespace AssemblyCSharp
 
         public static int Score { get; set; }
 
+        public static int LifeCount { get; set; }
+
         private static int countForMultiplicator;
         public static int CountForMultiplicator
         {

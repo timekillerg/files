@@ -41,7 +41,13 @@ public class Done_DestroyByContact : MonoBehaviour
                 if (UnityEngine.Random.Range(0, 2) == 0)
                 {
                     int bonus_id = UnityEngine.Random.Range(0, bonuses.Length);
-                    UnityEngine.Object bonus = Instantiate(bonuses[bonus_id], transform.position, Quaternion.identity);
+                    if (bonus_id != 7)
+                        Instantiate(bonuses[bonus_id], transform.position, Quaternion.identity);
+                    else
+                    {
+                        if(1 == UnityEngine.Random.Range(0, 10))
+                             Instantiate(bonuses[bonus_id], transform.position, Quaternion.identity);
+                    }
                 }
                 GameCore.CountForMultiplicator++;
                 if (GameCore.CountForMultiplicator % 3 >= 1)
@@ -51,11 +57,15 @@ public class Done_DestroyByContact : MonoBehaviour
 
         if (other.CompareTag("Player") && !AppCore.IsGodMod)
         {
-            Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
-            if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
-                AppCore.CurrentStatus = AppCore.Status.FAST_GAME_OVER;
-            else if (AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL)
-                AppCore.CurrentStatus = AppCore.Status.ANY_LEVEL_FAILED;
+            GameCore.LifeCount--;
+            if (GameCore.LifeCount == 0)
+            {
+                Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
+                if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
+                    AppCore.CurrentStatus = AppCore.Status.FAST_GAME_OVER;
+                else if (AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL)
+                    AppCore.CurrentStatus = AppCore.Status.ANY_LEVEL_FAILED;
+            }
         }
 
         GameCore.Score = GameCore.Score + scoreValue * GameCore.Multiplicator;

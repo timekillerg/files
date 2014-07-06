@@ -14,14 +14,15 @@ public class BonusPickUpHelper : MonoBehaviour
             Vector3 position = other.transform.position;
             Transform child = Instantiate(bonusPiskUpEffect, position, Quaternion.identity) as Transform;
 
-            Instantiate(bonusIcon, new Vector3(-10,-10,-10), Quaternion.identity);
+            if(bonusIcon!=null)
+                Instantiate(bonusIcon, new Vector3(-10,-10,-10), Quaternion.identity);
 
-            SetCurrentWeapon();
+            SetCurrentBonus();
             Destroy(gameObject);
         }
     }
 
-    private void SetCurrentWeapon()
+    private void SetCurrentBonus()
     {
         switch (gameObject.name)
         {
@@ -51,6 +52,9 @@ public class BonusPickUpHelper : MonoBehaviour
             case "BonusOther_Speed(Clone)":
                 AppCore.IsSlowMotion = false;
                 AppCore.IsFastMotion = true;
+                break;
+            case "BonusAddLife(Clone)":
+                GameCore.LifeCount++;
                 break;
         }
     }
