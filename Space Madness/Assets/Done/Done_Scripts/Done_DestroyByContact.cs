@@ -29,10 +29,8 @@ public class Done_DestroyByContact : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Boundary" || other.tag == "Enemy")
-        {
+        if (other.CompareTag("Boundary") || other.CompareTag("Enemy") || other.CompareTag("Bonus"))
             return;
-        }
 
         if (explosion != null)
         {
@@ -43,28 +41,36 @@ public class Done_DestroyByContact : MonoBehaviour
                 if (UnityEngine.Random.Range(0, 2) == 0)
                 {
                     int bonus_id = UnityEngine.Random.Range(0, bonuses.Length);
-                    UnityEngine.Object bonus = Instantiate(bonuses[bonus_id], transform.position, Quaternion.identity);
+                    if (bonus_id != 7)
+                        Instantiate(bonuses[bonus_id], transform.position, Quaternion.identity);
+                    else
+                    {
+                        if(1 == UnityEngine.Random.Range(0, 10))
+                             Instantiate(bonuses[bonus_id], transform.position, Quaternion.identity);
+                    }
                 }
+                GameCore.CountForMultiplicator++;
+                if (GameCore.CountForMultiplicator % 3 >= 1)
+                    GameCore.Multiplicator = GameCore.Multiplicator + GameCore.CountForMultiplicator / 3;
             }
         }
 
-        if (other.tag == "Player" && !AppCore.IsGodMod)
+        if (other.CompareTag("Player") && !AppCore.IsGodMod)
         {
-            Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
-            gameController.GameOver();
+            GameCore.LifeCount--;
+            if (GameCore.LifeCount == 0)
+            {
+                Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
+                if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
+                    AppCore.CurrentStatus = AppCore.Status.FAST_GAME_OVER;
+                else if (AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL)
+                    AppCore.CurrentStatus = AppCore.Status.ANY_LEVEL_FAILED;
+            }
         }
 
-        if (this.name.StartsWith("Done_Enemy Ship"))
-        {
-            GameCore.CountForMultiplicator++;
-            if (GameCore.CountForMultiplicator % 3 == 0)
-                GameCore.Multiplicator = 1 + GameCore.CountForMultiplicator / 3;
-        }
+        GameCore.Score = GameCore.Score + scoreValue * GameCore.Multiplicator;
 
-
-        gameController.AddScore(scoreValue);
-
-        if (other.gameObject.tag != "shield")
+        if (!other.gameObject.CompareTag("shield"))
             Destroy(other.gameObject);
 
         Destroy(gameObject);

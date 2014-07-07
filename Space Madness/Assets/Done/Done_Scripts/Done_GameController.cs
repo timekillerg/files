@@ -25,6 +25,8 @@ public class Done_GameController : MonoBehaviour
 
     public GUIText scoreText;
 
+    public GUIText lifesText;
+
     public GUIText multiplicatorText;
     public GameObject multiplicatorTextBorder;
 
@@ -55,8 +57,6 @@ public class Done_GameController : MonoBehaviour
 
     void Start()
     {
-        GameCore.CountForMultiplicator = 0;
-        GameCore.Multiplicator = 1;
         hazards = hazardsMeteor;
         if (AppCore.CurrentStatus != AppCore.Status.FAST_GAME)
             if (GameCore.mapType == Maps.IceAnomaly)
@@ -70,11 +70,15 @@ public class Done_GameController : MonoBehaviour
         Instantiate(countdown);
         gameOver = false;
         score = 0;
-        UpdateScore();
         StartCoroutine(SpawnWaves());
         AppCore.IsFastMotion = false;
         AppCore.IsGodMod = false;
         AppCore.IsSlowMotion = false;
+        GameCore.Multiplicator = 1;
+        GameCore.CountForMultiplicator = 0;
+        GameCore.Score = 0;
+        GameCore.LifeCount = 3;
+        lifesText.text = GameCore.LifeCount.ToString();
     }
 
     void ShowMultiplicatorIcon()
@@ -96,6 +100,9 @@ public class Done_GameController : MonoBehaviour
     void Update()
     {
         ShowMultiplicatorIcon();
+        CheckIsGameOver();
+        CheckIsScoreChanged();
+        CheckIsCountOfLifesChanged();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
@@ -150,29 +157,30 @@ public class Done_GameController : MonoBehaviour
         }
     }
 
-    public void AddScore(int newScoreValue)
+
+    void CheckIsScoreChanged()
     {
-        score += newScoreValue * GameCore.Multiplicator;
-        UpdateScore();
+        if (scoreText.text != GameCore.Score.ToString())
+            scoreText.text = GameCore.Score.ToString();
     }
 
-    void UpdateScore()
+    void CheckIsCountOfLifesChanged()
     {
-        scoreText.text = score.ToString();
+        if (lifesText.text != GameCore.LifeCount.ToString())
+            lifesText.text = GameCore.LifeCount.ToString();
     }
 
-    public void GameOver()
+    public void CheckIsGameOver()
     {
-        gameOver = true;
-        if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
+        if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME_OVER && gameOver == false)
         {
             Instantiate(gameOverButtons);
-            AppCore.CurrentStatus = AppCore.Status.FAST_GAME_OVER;
+            gameOver = true;
         }
-        else if (AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL)
+        else if (AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL_FAILED && gameOver == false)
         {
             Instantiate(levelFailedButtons);
-            AppCore.CurrentStatus = AppCore.Status.ANY_LEVEL_FAILED;
+            gameOver = true;
         }
     }
 }
