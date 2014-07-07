@@ -38,15 +38,15 @@ public class Done_DestroyByContact : MonoBehaviour
 
             if (this.name.StartsWith("Done_Enemy Ship"))
             {
-                if (UnityEngine.Random.Range(0, 2) == 0)
+                if (UnityEngine.Random.Range(0, 3) == 0)
                 {
                     int bonus_id = UnityEngine.Random.Range(0, bonuses.Length);
                     if (bonus_id != 7)
                         Instantiate(bonuses[bonus_id], transform.position, Quaternion.identity);
                     else
                     {
-                        if(1 == UnityEngine.Random.Range(0, 10))
-                             Instantiate(bonuses[bonus_id], transform.position, Quaternion.identity);
+                        if (1 == UnityEngine.Random.Range(0, 3))
+                            Instantiate(bonuses[bonus_id], transform.position, Quaternion.identity);
                     }
                 }
                 GameCore.CountForMultiplicator++;
@@ -58,20 +58,20 @@ public class Done_DestroyByContact : MonoBehaviour
         if (other.CompareTag("Player") && !AppCore.IsGodMod)
         {
             GameCore.LifeCount--;
-            if (GameCore.LifeCount == 0)
+            if (GameCore.LifeCount <=0)
             {
                 Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
+                Destroy(other.gameObject);
                 if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
                     AppCore.CurrentStatus = AppCore.Status.FAST_GAME_OVER;
                 else if (AppCore.CurrentStatus == AppCore.Status.ANY_LEVEL)
                     AppCore.CurrentStatus = AppCore.Status.ANY_LEVEL_FAILED;
             }
         }
+        else if (!other.gameObject.CompareTag("shield"))
+            Destroy(other.gameObject);
 
         GameCore.Score = GameCore.Score + scoreValue * GameCore.Multiplicator;
-
-        if (!other.gameObject.CompareTag("shield"))
-            Destroy(other.gameObject);
 
         Destroy(gameObject);
     }

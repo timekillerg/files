@@ -108,6 +108,6 @@ public class Done_PlayerController : MonoBehaviour
             Mathf.Clamp(rigidbody.position.z, boundary.zMin, boundary.zMax)
         );
 
-        rigidbody.rotation = Quaternion.Euler(0.0f, 0.0f, rigidbody.velocity.x * -tilt);
+        rigidbody.rotation = Quaternion.Euler(270 + rigidbody.velocity.x * -tilt, 270, 0.0f);
     }
 }

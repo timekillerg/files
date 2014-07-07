@@ -13,7 +13,7 @@ class ShowAndHideBonusIcon : MonoBehaviour
     private float speed = 4f;
     private bool isBonusShown;
 
-    private static Transform objectTrananform;
+    private Transform objectTrananform;
 
     void Start()
     {

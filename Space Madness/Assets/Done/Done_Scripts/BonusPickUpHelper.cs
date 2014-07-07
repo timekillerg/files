@@ -9,13 +9,13 @@ public class BonusPickUpHelper : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && bonusPiskUpEffect != null)
+        if (other.CompareTag("Player"))
         {
-            Vector3 position = other.transform.position;
-            Transform child = Instantiate(bonusPiskUpEffect, position, Quaternion.identity) as Transform;
+            if (bonusPiskUpEffect != null)
+                Instantiate(bonusPiskUpEffect, other.transform.position, Quaternion.identity);
 
-            if(bonusIcon!=null)
-                Instantiate(bonusIcon, new Vector3(-10,-10,-10), Quaternion.identity);
+            if (bonusIcon != null)
+                Instantiate(bonusIcon, new Vector3(-10, -10, -10), Quaternion.identity);
 
             SetCurrentBonus();
             Destroy(gameObject);
