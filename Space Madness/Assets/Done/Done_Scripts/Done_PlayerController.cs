@@ -57,7 +57,7 @@ public class Done_PlayerController : MonoBehaviour
         {
             rigidbody.velocity = Vector3.zero;
         }
-        rigidbody.rotation = Quaternion.Euler(0.0f, 0.0f, rigidbody.velocity.x * -tilt);
+        rigidbody.rotation = Quaternion.Euler(270 + rigidbody.velocity.x * -tilt, 270, 0.0f);
 
     }
 
@@ -90,7 +90,7 @@ public class Done_PlayerController : MonoBehaviour
         {
             rigidbody.velocity = Vector3.zero;
         }
-        rigidbody.rotation = Quaternion.Euler(0.0f, 0.0f, rigidbody.velocity.x * -tilt);
+        rigidbody.rotation = Quaternion.Euler(270 + rigidbody.velocity.x * -tilt, 270, 0.0f);
     }
 
     void MovePlayerFromKeyboard()
