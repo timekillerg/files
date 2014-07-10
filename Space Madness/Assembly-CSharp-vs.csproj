@@ -77,6 +77,7 @@
      <Compile Include="Assets\Done\Done_Scripts\GamePlay.MenuButtonScripts\PauseMenu_SoundButton.cs" />
      <Compile Include="Assets\Done\Done_Scripts\GamePlay.MenuButtonScripts\StartCountdown.cs" />
      <Compile Include="Assets\Done\Done_Scripts\GamePlayMenusController.cs" />
+     <Compile Include="Assets\Done\Done_Scripts\JoysticController.cs" />
      <Compile Include="Assets\Done\Done_Scripts\KeyboardController.cs" />
      <Compile Include="Assets\Done\Done_Scripts\LevelButtonPressListener.cs" />
      <Compile Include="Assets\Done\Done_Scripts\LevelInfoScript.cs" />

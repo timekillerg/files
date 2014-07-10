@@ -27,6 +27,7 @@ public class TouchMoveButtons : MonoBehaviour {
 	
 	void OnMouseDown()
 	{
+        Debug.Log("ff");
 		if (Input.GetMouseButtonDown(0)) {
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			RaycastHit hit;				

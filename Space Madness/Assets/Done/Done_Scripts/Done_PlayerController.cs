@@ -13,19 +13,15 @@ public class Done_PlayerController : MonoBehaviour
     public float speed;
     public float tilt;
     public Done_Boundary boundary;
-
-    public bool enableTouchPlayerControl;
-    public bool enableMousePlayerControl;
-    public bool enableKeyboardPlayerControl;
-
-    void FixedUpdate()
+    
+    void Update()
     {
-        if(enableTouchPlayerControl)
-            LoadTouchEvents();
-        if(enableMousePlayerControl)
-            LoadMouseEvents();
-        if(enableKeyboardPlayerControl)
-            MovePlayerFromKeyboard();
+        rigidbody.position = new Vector3
+            (
+                Mathf.Clamp(rigidbody.position.x, boundary.xMin, boundary.xMax),
+                0.0f,
+                Mathf.Clamp(rigidbody.position.z, boundary.zMin, boundary.zMax)
+                );        
     }
 
     void LoadTouchEvents()
