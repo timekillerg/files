@@ -6,10 +6,10 @@ public class Done_DestroyByBoundary : MonoBehaviour
 {
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag != "Player")
+        if (!other.CompareTag("Player"))
         {
-            if (other.name.StartsWith("Done_Enemy Ship"))
-            {               
+            if (other.CompareTag("EnemyShip"))
+            {
                 GameCore.CountForMultiplicator = 0;
                 GameCore.Multiplicator = 1;
             }

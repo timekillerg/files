@@ -25,7 +25,11 @@ var hit : RaycastHit;
 	{ // if it hits something, this happens
 	boxCollider.size.y=hit.distance;  //I set up a box collider to be along the laser...
 	boxCollider.center.y+=hit.distance/2;
-	if (impactEffect && hit.collider.tag == "Enemy") {
+	if (impactEffect && (
+    hit.collider.CompareTag("EnemyShip") ||
+    hit.collider.CompareTag("EnemyBolt") ||
+    hit.collider.CompareTag("Meteor")
+    )) {
             Instantiate(impactEffect, hit.point, hit.transform.rotation);
             _hit = hit; 
             _hitTime = Time.time+0.03;
@@ -37,7 +41,9 @@ function Update()
 {
     if (_hitTime>0 && _hitTime<Time.time)
     {
-        if(_hit.collider.tag == "Enemy") 
+        if( _hit.collider.CompareTag("EnemyShip") ||
+            _hit.collider.CompareTag("EnemyBolt") ||
+            _hit.collider.CompareTag("Meteor") ) 
         {
             _hit.transform.gameObject.SendMessage("OnTriggerEnter", this.collider); 
         }

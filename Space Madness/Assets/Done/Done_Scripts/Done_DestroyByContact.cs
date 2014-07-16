@@ -16,27 +16,18 @@ public class Done_DestroyByContact : MonoBehaviour
 
     void Start()
     {
-        GameObject gameControllerObject = GameObject.FindGameObjectWithTag("GameController");
-        if (gameControllerObject != null)
-        {
-            gameController = gameControllerObject.GetComponent<Done_GameController>();
-        }
-        if (gameController == null)
-        {
-            Debug.Log("Cannot find 'GameController' script");
-        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Boundary") || other.CompareTag("Enemy") || other.CompareTag("Bonus"))
+        if (other.CompareTag("Boundary") || other.CompareTag("EnemyShip") || other.CompareTag("EnemyBolt") || other.CompareTag("Meteor") || other.CompareTag("Bonus"))
             return;
 
         if (explosion != null)
         {
             Instantiate(explosion, transform.position, transform.rotation);
 
-            if (this.name.StartsWith("Done_Enemy Ship"))
+            if (this.CompareTag("EnemyShip"))
             {
                 if (UnityEngine.Random.Range(0, 3) == 0)
                 {
@@ -45,20 +36,26 @@ public class Done_DestroyByContact : MonoBehaviour
                         Instantiate(bonuses[bonus_id], transform.position, Quaternion.identity);
                     else
                     {
-                        if (1 == UnityEngine.Random.Range(0, 3))
+                        if (1 == UnityEngine.Random.Range(0, howOftenBonusesDropping))
                             Instantiate(bonuses[bonus_id], transform.position, Quaternion.identity);
                     }
                 }
                 GameCore.CountForMultiplicator++;
-                if (GameCore.CountForMultiplicator % 3 >= 1)
-                    GameCore.Multiplicator = GameCore.Multiplicator + GameCore.CountForMultiplicator / 3;
+                if (GameCore.CountForMultiplicator >= 3)
+                    GameCore.Multiplicator = 1 + (GameCore.CountForMultiplicator / 3);
             }
         }
 
         if (other.CompareTag("Player") && !AppCore.IsGodMod)
         {
-            GameCore.LifeCount--;
-            if (GameCore.LifeCount <=0)
+            if (this.CompareTag("Meteor") || this.CompareTag("EnemyShip"))
+                GameCore.Health = GameCore.Health - 20;
+            if (this.CompareTag("EnemyBolt"))
+                GameCore.Health = GameCore.Health - 10;
+            if (GameCore.Health < 0)
+                GameCore.Health = 0;
+
+            if (GameCore.Health == 0)
             {
                 Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
                 Destroy(other.gameObject);

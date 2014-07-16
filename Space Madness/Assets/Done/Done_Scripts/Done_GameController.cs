@@ -25,8 +25,6 @@ public class Done_GameController : MonoBehaviour
 
     public GUIText scoreText;
 
-    public GUIText lifesText;
-
     public GUIText multiplicatorText;
     public GameObject multiplicatorTextBorder;
 
@@ -78,7 +76,7 @@ public class Done_GameController : MonoBehaviour
         GameCore.CountForMultiplicator = 0;
         GameCore.Score = 0;
         GameCore.LifeCount = 3;
-        lifesText.text = GameCore.LifeCount.ToString();
+        GameCore.Health = 100;
     }
 
     void ShowMultiplicatorIcon()
@@ -102,7 +100,6 @@ public class Done_GameController : MonoBehaviour
         ShowMultiplicatorIcon();
         CheckIsGameOver();
         CheckIsScoreChanged();
-        CheckIsCountOfLifesChanged();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)
@@ -162,12 +159,6 @@ public class Done_GameController : MonoBehaviour
     {
         if (scoreText.text != GameCore.Score.ToString())
             scoreText.text = GameCore.Score.ToString();
-    }
-
-    void CheckIsCountOfLifesChanged()
-    {
-        if (lifesText.text != GameCore.LifeCount.ToString())
-            lifesText.text = GameCore.LifeCount.ToString();
     }
 
     public void CheckIsGameOver()
