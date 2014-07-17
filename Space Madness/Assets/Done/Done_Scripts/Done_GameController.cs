@@ -75,7 +75,6 @@ public class Done_GameController : MonoBehaviour
         GameCore.Multiplicator = 1;
         GameCore.CountForMultiplicator = 0;
         GameCore.Score = 0;
-        GameCore.LifeCount = 3;
         GameCore.Health = 100;
     }
 

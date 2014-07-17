@@ -54,7 +54,7 @@ public class BonusPickUpHelper : MonoBehaviour
                 AppCore.IsFastMotion = true;
                 break;
             case "BonusAddLife(Clone)":
-                GameCore.LifeCount++;
+                GameCore.Health = 100;
                 break;
         }
     }

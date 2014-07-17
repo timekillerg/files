@@ -8,6 +8,11 @@ public class Done_DestroyByContact : MonoBehaviour
     public GameObject explosion;
     public GameObject playerExplosion;
     public int scoreValue;
+
+    public GameObject minus20;
+    public GameObject minus10;
+    public Vector3 minusInitalPosition;
+
     private Done_GameController gameController;
 
     public int howOftenBonusesDropping;
@@ -49,9 +54,15 @@ public class Done_DestroyByContact : MonoBehaviour
         if (other.CompareTag("Player") && !AppCore.IsGodMod)
         {
             if (this.CompareTag("Meteor") || this.CompareTag("EnemyShip"))
+            {
                 GameCore.Health = GameCore.Health - 20;
+                Instantiate(minus20, minusInitalPosition, new Quaternion(0,180,0,0));
+            }
             if (this.CompareTag("EnemyBolt"))
+            {
                 GameCore.Health = GameCore.Health - 10;
+                Instantiate(minus10, minusInitalPosition, new Quaternion(0,180,0,0));
+            }
             if (GameCore.Health < 0)
                 GameCore.Health = 0;
 

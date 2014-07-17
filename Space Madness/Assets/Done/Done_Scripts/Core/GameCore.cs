@@ -21,9 +21,6 @@ namespace AssemblyCSharp
         private static float timeScale = 0.0f;
 
         public static int Score { get; set; }
-
-        public static int LifeCount { get; set; }
-
         public static int Health { get; set; }
 
         private static int countForMultiplicator;
