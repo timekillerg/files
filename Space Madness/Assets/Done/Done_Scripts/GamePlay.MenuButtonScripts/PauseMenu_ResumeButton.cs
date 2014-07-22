@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 using AssemblyCSharp;
 
-class PauseMenu_ResumeButton : MonoBehaviour
+public class PauseMenu_ResumeButton : MonoBehaviour
 {
     public GameObject countdown;
 

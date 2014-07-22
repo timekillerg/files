@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 
 
-class TransparentController : MonoBehaviour
+public class TransparentController : MonoBehaviour
 {
     public float tranparentSpeed;
     private Vector3 endPosition;

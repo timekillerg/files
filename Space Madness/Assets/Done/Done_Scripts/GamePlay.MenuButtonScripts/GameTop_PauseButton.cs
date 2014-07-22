@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 using AssemblyCSharp;
 
-class GameTop_PauseButton : MonoBehaviour
+public class GameTop_PauseButton : MonoBehaviour
 {
     public GameObject menuPauseButtons;
 

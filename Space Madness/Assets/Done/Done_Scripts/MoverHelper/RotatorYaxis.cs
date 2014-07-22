@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-class RotatorYaxis : MonoBehaviour
+public class RotatorYaxis : MonoBehaviour
 {
     public float tumble;
 

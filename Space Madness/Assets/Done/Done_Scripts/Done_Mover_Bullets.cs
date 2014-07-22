@@ -8,6 +8,6 @@ public class Done_Mover_Bullets : MonoBehaviour
 
     void Start()
     {
-        rigidbody.velocity = transform.forward * speed * (AppCore.IsFastMotion && !gameObject.CompareTag("EnemyBolt") ? 2f : 1f);
+        rigidbody.velocity = transform.forward * speed * (AppCore.IsFastMotion && !gameObject.CompareTag("EnemyBolt") ? 2f : 1f)*GameCore.Accelerate;
     }
 }

@@ -56,8 +56,10 @@ public class WeaponController : MonoBehaviour
         {
             GameCore.CurrentWeaponType = WeaponType.Default;
             GameCore.WeaponStartTime = 0;
-            CurrentWeapon = weapons[0];     
+            CurrentWeapon = weapons[0];
         }
+        if (audio.clip != CurrentWeapon.ShotSound)
+            audio.clip = CurrentWeapon.ShotSound;
     }
 
     public void Shoot()

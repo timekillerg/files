@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-class ButtonSpriteChanger : MonoBehaviour
+public class ButtonSpriteChanger : MonoBehaviour
 {    
     public Sprite pressedSprite;
     private Sprite notPressedSprite;

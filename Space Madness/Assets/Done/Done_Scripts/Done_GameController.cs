@@ -11,6 +11,11 @@ public class Done_GameController : MonoBehaviour
     public GameObject[] hazardsDownFall;
     public GameObject[] hazardsSunStorm;
 
+
+    public GameObject[] hazard1;
+    public GameObject[] hazard2;
+    public GameObject[] hazard3;
+
     public GameObject countdown;
     public GameObject gameOverButtons;
     public GameObject menuPauseButtons;
@@ -29,7 +34,6 @@ public class Done_GameController : MonoBehaviour
     public GameObject multiplicatorTextBorder;
 
     private bool gameOver;
-    private int score;
 
     private Vector3 V3_DELTA = new Vector3(0.1f, 0.1f, 0.1f);
     private Vector3 V3_MULT_VISIBLE = new Vector3(-4.75f, 1.9f, 12.4f);
@@ -55,7 +59,8 @@ public class Done_GameController : MonoBehaviour
 
     void Start()
     {
-        hazards = hazardsMeteor;
+        GameCore.StartTime = Time.time;
+        hazards = hazard1;
         if (AppCore.CurrentStatus != AppCore.Status.FAST_GAME)
             if (GameCore.mapType == Maps.IceAnomaly)
                 hazards = hazardsIce;
@@ -67,7 +72,6 @@ public class Done_GameController : MonoBehaviour
                 hazards = hazardsMeteor;
         Instantiate(countdown);
         gameOver = false;
-        score = 0;
         StartCoroutine(SpawnWaves());
         AppCore.IsFastMotion = false;
         AppCore.IsGodMod = false;
@@ -94,11 +98,21 @@ public class Done_GameController : MonoBehaviour
         }
     }
 
+    private void ChangeHazards() {
+        if (GameCore.AsteroidType == 1 && hazards != hazard1)
+            hazards = hazard1;
+        else if (GameCore.AsteroidType == 2 && hazards != hazard2)
+            hazards = hazard2;
+        else if (GameCore.AsteroidType == 3 && hazards != hazard3)
+            hazards = hazard3;
+    }
+
     void Update()
     {
         ShowMultiplicatorIcon();
         CheckIsGameOver();
         CheckIsScoreChanged();
+        ChangeHazards();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (AppCore.CurrentStatus == AppCore.Status.FAST_GAME)

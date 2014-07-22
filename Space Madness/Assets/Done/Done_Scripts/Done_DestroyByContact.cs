@@ -19,8 +19,12 @@ public class Done_DestroyByContact : MonoBehaviour
 
     public GameObject[] bonuses;
 
+    private int CountOfShots = 1;
+
     void Start()
     {
+        if (this.name.StartsWith("Asteroid_ice_0") || this.CompareTag("EnemyShip"))
+            CountOfShots = 2;
     }
 
     void OnTriggerEnter(Collider other)
@@ -30,25 +34,20 @@ public class Done_DestroyByContact : MonoBehaviour
 
         if (explosion != null)
         {
-            Instantiate(explosion, transform.position, transform.rotation);
-
-            if (this.CompareTag("EnemyShip"))
+            if ((this.CompareTag("Meteor") || this.CompareTag("EnemyShip")) && other.CompareTag("DefaultPlayerBolt"))
             {
-                if (UnityEngine.Random.Range(0, 3) == 0)
+                CountOfShots--;
+                if (CountOfShots <= 0)
                 {
-                    int bonus_id = UnityEngine.Random.Range(0, bonuses.Length);
-                    if (bonus_id != 7)
-                        Instantiate(bonuses[bonus_id], transform.position, Quaternion.identity);
-                    else
-                    {
-                        if (1 == UnityEngine.Random.Range(0, howOftenBonusesDropping))
-                            Instantiate(bonuses[bonus_id], transform.position, Quaternion.identity);
-                    }
+                    Instantiate(explosion, transform.position, transform.rotation);
+                    InstantiateBonus();
                 }
-                GameCore.CountForMultiplicator++;
-                if (GameCore.CountForMultiplicator >= 3)
-                    GameCore.Multiplicator = 1 + (GameCore.CountForMultiplicator / 3);
             }
+            else
+            {
+                Instantiate(explosion, transform.position, transform.rotation);
+                InstantiateBonus();
+            }            
         }
 
         if (other.CompareTag("Player") && !AppCore.IsGodMod)
@@ -56,12 +55,12 @@ public class Done_DestroyByContact : MonoBehaviour
             if (this.CompareTag("Meteor") || this.CompareTag("EnemyShip"))
             {
                 GameCore.Health = GameCore.Health - 20;
-                Instantiate(minus20, minusInitalPosition, new Quaternion(0,180,0,0));
+                Instantiate(minus20, minusInitalPosition, new Quaternion(0, 180, 0, 0));
             }
             if (this.CompareTag("EnemyBolt"))
             {
                 GameCore.Health = GameCore.Health - 10;
-                Instantiate(minus10, minusInitalPosition, new Quaternion(0,180,0,0));
+                Instantiate(minus10, minusInitalPosition, new Quaternion(0, 180, 0, 0));
             }
             if (GameCore.Health < 0)
                 GameCore.Health = 0;
@@ -81,6 +80,35 @@ public class Done_DestroyByContact : MonoBehaviour
 
         GameCore.Score = GameCore.Score + scoreValue * GameCore.Multiplicator;
 
-        Destroy(gameObject);
+        if ((this.CompareTag("Meteor") || this.CompareTag("EnemyShip")) && other.CompareTag("DefaultPlayerBolt"))
+        {
+            if (CountOfShots <= 0)
+                Destroy(gameObject);
+        }
+        else
+            Destroy(gameObject);
+
+    }
+
+
+    void InstantiateBonus()
+    {
+        if (this.CompareTag("EnemyShip"))
+        {
+            if (UnityEngine.Random.Range(0, howOftenBonusesDropping) == 0)
+            {
+                int bonus_id = UnityEngine.Random.Range(0, bonuses.Length);
+                if (bonus_id != 7)
+                    Instantiate(bonuses[bonus_id], transform.position, Quaternion.identity);
+                else
+                {
+                    if (1 == UnityEngine.Random.Range(0, howOftenBonusesDropping))
+                        Instantiate(bonuses[bonus_id], transform.position, Quaternion.identity);
+                }
+            }
+            GameCore.CountForMultiplicator++;
+            if (GameCore.CountForMultiplicator >= 3)
+                GameCore.Multiplicator = 1 + (GameCore.CountForMultiplicator / 3);
+        }
     }
 }
