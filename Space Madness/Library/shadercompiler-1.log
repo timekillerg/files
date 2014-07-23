@@ -4,6 +4,10 @@ Pipe name: \\.\pipe\UnityShaderCompiler-1-6132
 Cmd: getPlatforms
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> parent of 8ace6a5... ывыва
 =======
 Base path: H:/Program files/Unity/Editor/Data
 Pipe name: \\.\pipe\UnityShaderCompiler-1-2572
@@ -25,3 +29,10 @@ Cmd: preprocess
 Cmd: preprocess
   insize=1236 outsize=495 ok=1
 >>>>>>> parent of 270bee3... iskarki
+<<<<<<< HEAD
+=======
+=======
+Cmd: preprocess
+  insize=1236 outsize=495 ok=1
+>>>>>>> parent of 270bee3... iskarki
+>>>>>>> parent of 8ace6a5... ывыва
