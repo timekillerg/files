@@ -1,7 +1,8 @@
 <<<<<<< HEAD
 Base path: C:/Program Files (x86)/Unity/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-1-9356
+Pipe name: \\.\pipe\UnityShaderCompiler-1-6132
 Cmd: getPlatforms
+<<<<<<< HEAD
 =======
 Base path: H:/Program files/Unity/Editor/Data
 Pipe name: \\.\pipe\UnityShaderCompiler-1-2572
@@ -15,3 +16,7 @@ Cmd: compileSnippet
 Cmd: compileSnippet
   api=9 type=1 insize=1005 outsize=7 kw= ok=1
 >>>>>>> origin/master
+=======
+Cmd: preprocess
+  insize=1236 outsize=495 ok=1
+>>>>>>> parent of 270bee3... iskarki
