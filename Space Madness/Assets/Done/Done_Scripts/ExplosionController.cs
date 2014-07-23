@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class ExplosionController : MonoBehaviour
+public class ExplosionController : MonoBehaviour
 {
     public GameObject explosionObject;
 

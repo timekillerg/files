@@ -5,8 +5,7 @@ using System.Text;
 using UnityEngine;
 using AssemblyCSharp;
 
-
-class SmokeAndFireController : MonoBehaviour
+public class SmokeAndFireController : MonoBehaviour
 {
     public GameObject Smoke;
     public GameObject Fire1;
@@ -27,7 +26,7 @@ class SmokeAndFireController : MonoBehaviour
             Fire1.SetActive(true);
             Fire2.SetActive(true);
         }
-        else if (GameCore.Health <= 60)
+        else if (GameCore.Health <= 50)
         {
             Smoke.SetActive(true);
             Fire1.SetActive(true);

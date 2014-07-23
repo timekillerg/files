@@ -7,8 +7,40 @@ namespace AssemblyCSharp
     public enum Maps { MeteorRain, IceAnomaly, DownFall, SunStorm, Unknown }
     public enum WeaponType { Default, Rocket, Laser, Plasma, Acid }
 
-	public static class GameCore
-	{
+    public static class GameCore
+    {
+        public static float StartTime;
+        
+        public static float PlayingTime
+        {
+            get
+            {
+                return Time.time - StartTime;
+            }
+        }
+
+        public static float Accelerate
+        {
+            get
+            {
+                return 1 + PlayingTime / 300;
+            }
+        }
+
+        public static int AsteroidType
+        {
+            get
+            {
+                if (PlayingTime < 120)
+                    return 1;
+                else if (PlayingTime < 240)
+                    return 2;
+                else 
+                    return 3;
+            }
+        }
+
+
         public static WeaponType CurrentWeaponType;
         public static float WeaponStartTime;
 
@@ -40,7 +72,7 @@ namespace AssemblyCSharp
 
         public static void StopGame()
         {
-            if(Time.timeScale !=0.0f)
+            if (Time.timeScale != 0.0f)
             {
                 timeScale = Time.timeScale;
                 Time.timeScale = 0.0f;
@@ -229,7 +261,7 @@ namespace AssemblyCSharp
                     gameTask.SurviveTime = 0;
                     break;
                 default:
-                    if(levelButtonName.Contains("Meteor Level"))
+                    if (levelButtonName.Contains("Meteor Level"))
                         mapType = Maps.MeteorRain;
                     else if (levelButtonName.Contains("Ice Level"))
                         mapType = Maps.IceAnomaly;
@@ -241,9 +273,9 @@ namespace AssemblyCSharp
                     gameTask = new GameTask();
                     break;
             }
-                 
+
         }
-	}
+    }
 
     public class GameParameters
     {
@@ -253,8 +285,8 @@ namespace AssemblyCSharp
         {
             get { return acceleration; }
             set { acceleration = value; }
-        }   
-                
+        }
+
         public GameParameters()
         {
             this.acceleration = 1.0f;
@@ -299,5 +331,6 @@ namespace AssemblyCSharp
         public string Name;
         public GameObject Bolt;
         public float PeriodBetweenShots;
+        public AudioClip ShotSound;
     }
 }

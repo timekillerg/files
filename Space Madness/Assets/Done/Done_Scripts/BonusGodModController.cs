@@ -2,7 +2,7 @@
 using AssemblyCSharp;
 using System.Collections;
 
-class BonusGodModController : MonoBehaviour
+public class BonusGodModController : MonoBehaviour
 {
     public GameObject GodModGuard;
     public float GodModLifeTime;

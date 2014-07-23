@@ -2,7 +2,7 @@
 using System.Collections;
 using AssemblyCSharp;
 
-class AudioPlayer : MonoBehaviour
+public class AudioPlayer : MonoBehaviour
 {
     public AudioClip music_bg_meteor;
     public AudioClip music_bg_ice;
